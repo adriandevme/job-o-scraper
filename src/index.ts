@@ -1,4 +1,6 @@
 import {Command, flags} from '@oclif/command'
+import axios from 'axios';
+import * as fs from 'fs'; 
 
 class JobOScraper extends Command {
   static description = 'describe the command here'
@@ -18,8 +20,14 @@ class JobOScraper extends Command {
   async run() {
     const {args, flags} = this.parse(JobOScraper)
 
-    const name = flags.name || 'world'
-    this.log(`hello ${name} from .\\src\\index.ts`)
+    // let URL = 'https://www.workana.com/jobs?ref=home_top_bar';
+    // const response = await axios.get(URL);
+    // const filename = 'workana.mock.html';
+    // console.log(response);
+    // fs.writeFileSync(__dirname + '/' + filename, response.data);
+
+    //const name = flags.name || 'world'
+    this.log('Job-o CLI')
     if (args.file && flags.force) {
       this.log(`you input --force and --file: ${args.file}`)
     }

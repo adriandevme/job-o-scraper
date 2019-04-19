@@ -11,6 +11,11 @@
     "@oclif/command": "^1.5.12",
     "@oclif/config": "^1.12.12",
     "@oclif/plugin-help": "^2.1.6",
+    "@types/cheerio": "^0.22.11",
+    "@types/request": "^2.48.1",
+    "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.3",
+    "request": "^2.88.0",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -47,7 +52,8 @@
   "scripts": {
     "posttest": "tslint -p test -t stylish",
     "prepack": "rimraf lib && tsc -b",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\""
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test:dev": "nyc --extension .ts mocha \"test/**/*.test.ts\""
   },
   "types": "lib/index.d.ts"
 }
