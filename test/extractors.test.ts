@@ -5,7 +5,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import Workana = require('../src/extractors/Workana');
-console.log('CMD', );
 
 // Vars
 
@@ -27,8 +26,8 @@ describe.only('job-o-scraper.extractors', () => {
 
   test
     .stdout()
-    .do(() => cmd.run(['--url', 'https://www.tecnoempleo.com/busqueda-empleo.php?te=javascript&cp=,29,&pr=,234,#buscador-ofertas-ini']))
-    .it('performs a manual search', ctx => {
-      expect(ctx.stdout).to.contain('todo mock data');
+    .do(() => cmd.run(['--url', 'https://www.workana.com/jobs?ref=home_top_bar']))
+    .it('Runs in URL mode with Workana parser', ctx => {
+      expect(ctx.stdout).to.contain('Workana');
     })
 })
