@@ -3,3 +3,6 @@
 - Ver porque no funciona el it.only en mocha
 - Migrar el modulo de logs
 - Descubrir como depurar la aplicacion con visual studio
+
+
+- Te quedaste creando el metodo estatico 'upsertAll'

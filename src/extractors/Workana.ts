@@ -4,6 +4,8 @@
 import * as fs from 'fs';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import * as storage from 'node-persist';
+import { Offer } from '../models/Offer';
 
 export class Workana { // @TODO create an interface
   // Vars
@@ -15,6 +17,7 @@ export class Workana { // @TODO create an interface
   
   // Constructor
   constructor(config: any) {
+    //Parse values
     this.config = config;
     this.MAIN_URL = 'https://www.workana.com';
     this.company = 'Workana';
@@ -83,29 +86,23 @@ export class Workana { // @TODO create an interface
   // Parses an HTML body string to a nice array of projecs found
   public parseHTML(body: Buffer) { //not sure if its a string
     
-    let items:Array<any>=[];
+    let items:Array<Offer>=[];
     let self = this;
     
     try{
-      // this.title = data.title;
-      // this.description = data.description;
-      // this.url = data.url;
-      // this.price = data.price;
-      // this.priceTo = data.priceTo;
-      // this.hourly = data.hourly;
-
       // Safely tries to parse object
       let $ = cheerio.load(body);
 
       $('.listing').each((i, element)=>{        
-        let item:any = {} //@TODO refactor 
+        let item:any = {}        
         item.title = $(element).find('.project-title').text().trim();
         item.description = $(element).find('.project-details').text().trim();
         item.price = $(element).find('.budget').text().trim();
         item.url = self.MAIN_URL + $(element).find('.project-title>a').attr('href'); 
         item.company = 'Workana';
-
-        items.push(item); //@TODO remember to refactor to the proper class
+        item.id = item.company+'>>'+item.title;
+        const offer = new Offer(item);
+        items.push(offer); 
       });
     }
     catch(e){

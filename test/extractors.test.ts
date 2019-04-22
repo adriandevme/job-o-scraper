@@ -8,7 +8,7 @@ import Workana = require('../src/extractors/Workana');
 
 // Vars
 
-describe.only('job-o-scraper.extractors', () => {
+describe('job-o-scraper.extractors', () => {
   
   test
     .it('Test the Workana extractor', ctx => {
@@ -18,6 +18,12 @@ describe.only('job-o-scraper.extractors', () => {
       let result = workana.parseHTML(workana_mock);            
       expect(result.length).to.be.equal(10);
     });
+
+  test
+    .it('Offer model should be well formed', ctx => {
+      //Create model
+      //Check properties
+    })
 
   test    
     .it('An extractor should use the proper interface', ctx => {
