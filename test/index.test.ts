@@ -2,7 +2,7 @@ import {expect, test} from '@oclif/test'
 
 import cmd = require('../src')
 
-describe('job-o-scraper', () => {
+describe.skip('job-o-scraper', () => {
   test
     .stdout()
     .do(() => cmd.run([]))
