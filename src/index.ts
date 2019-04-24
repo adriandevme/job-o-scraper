@@ -1,7 +1,8 @@
 import {Command, flags} from '@oclif/command'
 import axios from 'axios';
-//const storage = require('node-persist');
 import * as storage from 'node-persist';
+import * as fs from 'fs'; 
+import * as path from 'path';
 
 import Workana = require('./extractors/Workana');
 import { Offer } from './models/Offer';
@@ -20,6 +21,7 @@ class JobOScraper extends Command {
 
   async run() {
     const {args, flags} = this.parse(JobOScraper)
+    const self = this;
 
     // Init ddbb
     await storage.init(); //@TODO should init with a proper config
@@ -31,39 +33,37 @@ class JobOScraper extends Command {
       const offers = await this.processURL(flags.url)
       // Save results
       const saved = await this.saveOffers(offers);
-      // Log
-      this.log(`Success! ${offers.length} new offer(s) found from Workana site`);
     }
     else if (flags.conf){
-      // Check if
-      const config = this.parseConf(flags.conf);
+      // Run from conf file
+      const config = this.parseConf(path.join(__dirname, flags.conf));
+      this.log('Starting in endless mode...');
       // If endless mode is enabled (default false)
       if (config.endless){
         // Set the timer
-        setTimeout(function () { 
+        setInterval(async function () { 
           //Iterate 
           for (const url of config.urls){ //@TODO refactor, now assuming every url is from workana site
-            
+            // Get offers
+            const offers = await self.processURL(url)
+            // Save results
+            const saved = await self.saveOffers(offers);
           }
         }, config.delay); //Using delay from config
       }
     }
     else{
       this.log('No param set, running in URL mode...');
-      //run --url=https://www.workana.com/jobs?ref=home_top_bar
+      //run --url="https://www.workana.com/jobs?ref=home_top_bar"
+      //run --conf="../bin/default.json"
     }     
-
-    // const name = flags.name || 'world'
-    // this.log(`hello ${name} from .\\src\\commands\\hello.ts`)
-    // if (args.file && flags.force) {
-    //   this.log(`you input --force and --file: ${args.file}`)
-    // }
   }
 
   private async processURL(url:string){
     // Init array
     let offers:Array<Offer>=[];
     // Request to the server
+    this.log('Requesting url ' + url);
     const response = await axios.get(url as string);      
     let workana = new Workana.Workana({});
     offers = await workana.parseHTML(response.data as any);      
@@ -78,12 +78,14 @@ class JobOScraper extends Command {
       if (o)
         upserted.push(o);
     }
+    // Log
+    this.log(`Success! ${upserted.length} new offer(s) found and saved`);
     return upserted;
   }
 
-  private parseConf(raw_config: any){
+  private parseConf(conf_url: any){
     //@TODO parse
-    return raw_config;
+    return JSON.parse(fs.readFileSync(conf_url, 'utf8'));;
   }
 }
 

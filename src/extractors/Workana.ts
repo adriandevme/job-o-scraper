@@ -93,7 +93,7 @@ export class Workana { // @TODO create an interface
       // Safely tries to parse object
       let $ = cheerio.load(body);
 
-      $('.listing').each((i, element)=>{        
+      $('.project-item').each((i, element)=>{        
         let item:any = {}        
         item.title = $(element).find('.project-title').text().trim();
         item.description = $(element).find('.project-details').text().trim();
