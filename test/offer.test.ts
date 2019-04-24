@@ -9,7 +9,7 @@ import Offer = require('../src/models/Offer');
 
 // Vars
 
-describe.only('job-o-scraper.offer', () => {
+describe('job-o-scraper.offer', () => {
   
   test
     .it('Creates a new Offer', ctx => {
@@ -97,16 +97,4 @@ describe.only('job-o-scraper.offer', () => {
       //Expect    
       expect(upserted).to.be.null;
     });
-
-  // test    
-  //   .it('An extractor should use the proper interface', ctx => {
-  //     expect(typeof Workana).to.equal('Extractor');
-  //   })
-
-  // test
-  //   .stdout()
-  //   .do(() => cmd.run(['--url', 'https://www.workana.com/jobs?ref=home_top_bar']))
-  //   .it('Runs in URL mode with Workana parser', ctx => {
-  //     expect(ctx.stdout).to.contain('Workana');
-  //   })
 })
