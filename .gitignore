@@ -7,3 +7,6 @@
 /yarn.lock
 node_modules
 *.code-workspace
+/.node-persist
+.node-persist
+/bin/.node-persist

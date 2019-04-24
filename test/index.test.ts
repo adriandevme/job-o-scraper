@@ -2,18 +2,18 @@ import {expect, test} from '@oclif/test'
 
 import cmd = require('../src')
 
-describe('job-o-scraper', () => {
+describe.skip('job-o-scraper', () => {
   test
     .stdout()
     .do(() => cmd.run([]))
-    .it('runs hello', ctx => {
-      expect(ctx.stdout).to.contain('hello world')
+    .it('simply runs', ctx => {
+      expect(ctx.stdout).to.contain('Job-o CLI')
     })
 
   test
     .stdout()
-    .do(() => cmd.run(['--name', 'jeff']))
-    .it('runs hello --name jeff', ctx => {
-      expect(ctx.stdout).to.contain('hello jeff')
+    .do(() => cmd.run(['--url', 'https://www.tecnoempleo.com/busqueda-empleo.php?te=javascript&cp=,29,&pr=,234,#buscador-ofertas-ini']))
+    .it('performs a manual search', ctx => {
+      expect(ctx.stdout).to.contain('todo mock data');
     })
 })
