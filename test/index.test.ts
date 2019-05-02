@@ -16,4 +16,11 @@ describe.skip('job-o-scraper', () => {
     .it('performs a manual search', ctx => {
       expect(ctx.stdout).to.contain('todo mock data');
     })
-})
+  
+  test
+    .stdout()
+    .do(() => cmd.run(['--url', 'https://www.workana.com/jobs?ref=home_top_bar']))
+    .it('Runs in URL mode with Workana parser', ctx => {
+      expect(ctx.stdout).to.contain('Workana');
+    })
+  })

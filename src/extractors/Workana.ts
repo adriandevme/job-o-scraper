@@ -99,7 +99,7 @@ export default class Workana { // @TODO create an interface
         item.description = $(element).find('.project-details').text().trim();
         item.price = $(element).find('.budget').text().trim();
         item.url = self.MAIN_URL + $(element).find('.project-title>a').attr('href'); 
-        item.company = 'Workana';
+        item.company = self.company;
         item.id = item.company+'>>'+item.title;
         const offer = new Offer(item);
         items.push(offer); 
