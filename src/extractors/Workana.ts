@@ -7,7 +7,7 @@ import * as cheerio from 'cheerio';
 import * as storage from 'node-persist';
 import { Offer } from '../models/Offer';
 
-export class Workana { // @TODO create an interface
+export default class Workana { // @TODO create an interface
   // Vars
   private config: any;
   private MAIN_URL: string;

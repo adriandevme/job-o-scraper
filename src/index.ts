@@ -4,7 +4,7 @@ import * as storage from 'node-persist';
 import * as fs from 'fs'; 
 import * as path from 'path';
 
-import Workana = require('./extractors/Workana');
+import Workana from './extractors/Workana';
 import { Offer } from './models/Offer';
 
 class JobOScraper extends Command {
@@ -65,8 +65,17 @@ class JobOScraper extends Command {
     // Request to the server
     this.log('Requesting url ' + url);
     const response = await axios.get(url as string);      
-    let workana = new Workana.Workana({});
-    offers = await workana.parseHTML(response.data as any);      
+    // Select parser
+    try{
+      let parser_name:string = url.split('.')[1];
+      const ParserImport = await import('./extractors/'+parser_name);
+      let parser = new ParserImport.default({});
+      // Parse offers
+      offers = await parser.parseHTML(response.data as any);      
+    }
+    catch(e){
+      this.log('Parser undefined for url', e);
+    }
     // Return
     return offers;
   }
