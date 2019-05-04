@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import Workana = require('../src/extractors/Workana');
 import Stacko = require('../src/extractors/Stackoverflow');
+import Tecnoempleo = require('../src/extractors/Tecnoempleo');
 
 // Vars
 
@@ -32,7 +33,20 @@ describe.only('job-o-scraper.extractors', () => {
     let result = stacko.parseHTML(stacko_response.data);    
 
     expect(result.length).to.be.equal(10);
-  });
+  })
+
+  test
+  .it('Test the Tecnoempleo extractor', async ctx => {
+    // Load HTML
+    //const url = 'https://www.tecnoempleo.com/busqueda-empleo.php';
+    //let tecnoempleo_response = await axios.get(url as string); 
+    //fs.writeFileSync(path.join(__dirname, './mocks/tecnoempleo.mock.html'), tecnoempleo_response.data);
+    let tecnoempleo_response = { data: fs.readFileSync(path.join(__dirname, './mocks/tecnoempleo.mock.html'))};
+    let tecnoempleo = new Tecnoempleo.default({});      
+    let result = tecnoempleo.parseHTML(tecnoempleo_response.data);    
+
+    expect(result.length).to.be.equal(10);
+  })
 
   test
     .it('Offer model should be well formed', ctx => {

@@ -74,7 +74,7 @@ class JobOScraper extends Command {
       offers = await parser.parseHTML(response.data as any);      
     }
     catch(e){
-      this.log('Parser undefined for url', e);
+      this.log('Parser not defined for ' + url.split('.')[1], e);
     }
     // Return
     return offers;

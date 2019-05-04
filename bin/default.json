@@ -2,5 +2,7 @@
     "endless": true,
     "delay": 10000,
     "urls": ["https://www.workana.com/jobs?ref=home_top_bar&page=1", 
-        "https://www.workana.com/jobs?ref=home_top_bar&page=2"]
+        "https://www.workana.com/jobs?ref=home_top_bar&page=2",
+        "https://www.stackoverflow.com/jobs",
+        "https://www.tecnoempleo.com/busqueda-empleo.php"]
 }
