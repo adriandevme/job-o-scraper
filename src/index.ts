@@ -37,19 +37,13 @@ class JobOScraper extends Command {
     else if (flags.conf){
       // Run from conf file
       const config = this.parseConf(path.join(__dirname, flags.conf));
-      this.log('Starting in endless mode...');
-      // If endless mode is enabled (default false)
-      if (config.endless){
-        // Set the timer
-        setInterval(async function () { 
-          //Iterate 
-          for (const url of config.urls){ //@TODO refactor, now assuming every url is from workana site
-            // Get offers
-            const offers = await self.processURL(url)
-            // Save results
-            const saved = await self.saveOffers(offers);
-          }
-        }, config.delay); //Using delay from config
+      this.log('Reading conf file..');
+      //Iterate 
+      for (const url of config.urls){ //@TODO refactor, now assuming every url is from workana site
+        // Get offers
+        const offers = await self.processURL(url)
+        // Save results
+        const saved = await self.saveOffers(offers);
       }
     }
     else{

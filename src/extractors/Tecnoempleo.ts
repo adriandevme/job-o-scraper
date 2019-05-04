@@ -76,7 +76,7 @@ export default class Tecnoempleo { // @TODO create an interface
       salary.currency = '€';
     }
     catch(e){
-      console.log('Error', e);
+      //console.log('Error', e);
     }
     return salary;
   }
