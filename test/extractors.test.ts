@@ -14,7 +14,7 @@ import Tecnoempleo = require('../src/extractors/Tecnoempleo');
 describe.only('job-o-scraper.extractors', () => {
   
   test
-    .it('Test the Workana extractor', ctx => {
+    .it('should crawl all items from Workana website', ctx => {
       // Load HTML
       let workana_mock = fs.readFileSync(path.join(__dirname, './mocks/workana.mock.html'));
       let workana = new Workana.default({});      
@@ -23,7 +23,7 @@ describe.only('job-o-scraper.extractors', () => {
     });
 
   test
-  .it('Test the Stackoverflow extractor', async ctx => {
+  .it('should crawl all items from Workana website', async ctx => {
     // Load HTML
     const url = 'https://stackoverflow.com/jobs';
     //let stacko_response = await axios.get(url as string); 

@@ -1,5 +1,6 @@
 {
     "urls": ["https://www.workana.com/jobs?ref=home_top_bar&page=1",
         "https://www.stackoverflow.com/jobs",
-        "https://www.tecnoempleo.com/busqueda-empleo.php"]
+        "https://www.tecnoempleo.com/busqueda-empleo.php",
+        "https://landing.jobs/jobs?&hd=false&t_co=false&t_st=false"]
 }
