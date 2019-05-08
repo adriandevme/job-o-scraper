@@ -7,8 +7,6 @@ import * as storage from 'node-persist';
 
 import Offer = require('../src/models/Offer');
 
-// Vars
-
 describe('job-o-scraper.offer', () => {
   
   test
@@ -17,7 +15,9 @@ describe('job-o-scraper.offer', () => {
       let raw_offer:any = {
         title: 'title',
         description: 'description',
-        price: '40.25',
+        salary_min: '40.25',
+        salary_max: '60.80',
+        currency: '€',
         url: 'url',
         company: 'company',
         id: 'id'
@@ -28,10 +28,11 @@ describe('job-o-scraper.offer', () => {
       expect(offer instanceof Offer.Offer).to.be.true;
       expect(offer.title).to.equal('title');
       expect(offer.description).to.equal('description');
-      expect(offer.price).to.equal(40.25);
+      expect(offer.salary_min).to.equal(40.25);
+      expect(offer.salary_max).to.equal(60.80);
       expect(offer.url).to.equal('url');
       expect(offer.company).to.equal('company');
-      expect(offer.id).to.equal('id');
+      expect(offer.id).to.equal('companytitle');
     });
 
     it('Saves an offer', async () => {
