@@ -14,6 +14,7 @@ export default class Stackoverflow { // @TODO create an interface
   private company: string;
 
   static parser_ref: string = 'stackoverflow';
+  static parser_logo: string = 'https://i.stack.imgur.com/440u9.png'
   
   // Constructor
   constructor(config: any) {

@@ -15,6 +15,7 @@ export class Offer {
   readonly salary_min: number;
   readonly salary_max: number;
   readonly salary_currency: string;
+  readonly extractor: string;
   //readonly createdAt: Date;
 
   /**
@@ -33,6 +34,7 @@ export class Offer {
     this.salary_max = Number(data.salary_max) ? Number(data.salary_max) : 0;
     this.salary_min = Number(data.salary_max) ? Number(data.salary_max) : 0;
     this.salary_currency = data.salary_currency;
+    this.extractor = data.extractor;
     //this.createdAt = new Date(Date.now());
   }
 

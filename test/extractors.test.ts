@@ -12,7 +12,7 @@ import { Offer } from '../src/models/Offer';
 
 // Vars
 
-describe.only('job-o-scraper.extractors', () => {
+describe('job-o-scraper.extractors', () => {
   
   test
     .it('should crawl all items from Workana website', async ctx => {

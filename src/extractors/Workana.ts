@@ -12,8 +12,9 @@ export default class Workana { // @TODO create an interface
   private config: any;
   private MAIN_URL: string;
   private company: string;
-
+  
   static parser_ref: string = 'workana';
+  static parser_logo: string = 'https://www.workana.com/blog/wp-content/uploads/2018/10/Logo-Workana.png'
   
   // Constructor
   constructor(config: any) {

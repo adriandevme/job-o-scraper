@@ -14,6 +14,7 @@ export default class Tecnoempleo { // @TODO create an interface
   private company: string;
 
   static parser_ref: string = 'tecnoempleo';
+  static parser_logo: string = 'http://ediciones.openexpo.es/wp-content/uploads/2016/11/tecnoempleo-logo.png'
   
   // Constructor
   constructor(config: any) {
