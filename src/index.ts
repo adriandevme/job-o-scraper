@@ -4,8 +4,8 @@ import * as storage from 'node-persist';
 import * as fs from 'fs'; 
 import * as path from 'path';
 
-import Workana from './extractors/Workana';
 import { Offer } from './models/Offer';
+import Reporter from './reporters/Reporter';
 
 class JobOScraper extends Command {
   static description = 'describe the command here'
@@ -23,28 +23,33 @@ class JobOScraper extends Command {
     const {args, flags} = this.parse(JobOScraper)
     const self = this;
 
-    // Init ddbb
-    await storage.init(); //@TODO should init with a proper config
+    // Init local ddbb
+    await storage.init({dir: path.join(__dirname, '../.node-persist')}); //@TODO should init with a proper config
 
-    if (flags.url){
+    if (flags.conf){
+      // Run from conf file
+      const config = this.parseConf(path.join(__dirname, flags.conf));
+      this.log('Reading conf file..');
+      //Read URLs
+      for (const url of config.urls){
+        // Get offers
+        const offers = await self.processURL(url)
+        // Save results
+        const saved = await self.saveOffers(offers);
+        // Generate report
+        if (saved){          
+          const reporter = new Reporter(config);
+          await reporter.process(config.reporters, saved);
+        }
+      }
+    }
+    else if (flags.url){
       // Run in URL mode
       this.log('Reading single URL...', flags.url);
       // Get offers
       const offers = await this.processURL(flags.url)
       // Save results
       const saved = await this.saveOffers(offers);
-    }
-    else if (flags.conf){
-      // Run from conf file
-      const config = this.parseConf(path.join(__dirname, flags.conf));
-      this.log('Reading conf file..');
-      //Iterate 
-      for (const url of config.urls){ //@TODO refactor, now assuming every url is from workana site
-        // Get offers
-        const offers = await self.processURL(url)
-        // Save results
-        const saved = await self.saveOffers(offers);
-      }
     }
     else{
       this.log('No param set, running in URL mode...');

@@ -4,7 +4,7 @@
 import axios from "axios";
 import * as storage from "node-persist";
 
-export class Offer {
+export class Offer { //@TODO add default
 
   readonly id: string; //@WATCHOUT
   readonly title: string;
@@ -16,6 +16,7 @@ export class Offer {
   readonly salary_max: number;
   readonly salary_currency: string;
   readonly extractor: string;
+  readonly extractor_logo: string; //@TODO to move when I'll interface the class
   //readonly createdAt: Date;
 
   /**
@@ -26,6 +27,8 @@ export class Offer {
     //Build ID
     this.id = data.company + data.title;
     //Assign fields
+    this.extractor = data.extractor;
+    this.extractor_logo = data.extractor_logo;    
     this.title = data.title;
     this.description = data.description;
     this.url = data.url;
@@ -34,7 +37,6 @@ export class Offer {
     this.salary_max = Number(data.salary_max) ? Number(data.salary_max) : 0;
     this.salary_min = Number(data.salary_max) ? Number(data.salary_max) : 0;
     this.salary_currency = data.salary_currency;
-    this.extractor = data.extractor;
     //this.createdAt = new Date(Date.now());
   }
 

@@ -13,8 +13,8 @@ export default class Stackoverflow { // @TODO create an interface
   private MAIN_URL: string;
   private company: string;
 
-  static parser_ref: string = 'stackoverflow';
-  static parser_logo: string = 'https://i.stack.imgur.com/440u9.png'
+  static extractor_ref: string = 'stackoverflow';
+  static extractor_logo: string = 'https://i.stack.imgur.com/440u9.png'
   
   // Constructor
   constructor(config: any) {
@@ -96,6 +96,8 @@ export default class Stackoverflow { // @TODO create an interface
 
       $('.-job-summary').each((i, element)=>{        
         let item:any = {}        
+        item.extractor = Stackoverflow.extractor_ref;
+        item.extractor_logo = Stackoverflow.extractor_logo;
         item.title = $(element).find('.-title>h2').text().trim();
         //item.description = $(element).find('.project-details').text().trim();
         let salary = this.parseSalary($(element).find('.-salary').text().trim())

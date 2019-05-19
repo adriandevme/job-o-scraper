@@ -13,8 +13,8 @@ export default class Tecnoempleo { // @TODO create an interface
   private MAIN_URL: string;
   private company: string;
 
-  static parser_ref: string = 'tecnoempleo';
-  static parser_logo: string = 'http://ediciones.openexpo.es/wp-content/uploads/2016/11/tecnoempleo-logo.png'
+  static extractor_ref: string = 'tecnoempleo';
+  static extractor_logo: string = 'http://ediciones.openexpo.es/wp-content/uploads/2016/11/tecnoempleo-logo.png'
   
   // Constructor
   constructor(config: any) {
@@ -36,6 +36,8 @@ export default class Tecnoempleo { // @TODO create an interface
 
       $('article').each((i, element)=>{        
         let item:any = {}        
+        item.extractor = Tecnoempleo.extractor_ref;
+        item.extractor_logo = Tecnoempleo.extractor_logo;
         item.title = $(element).find('h3>a').text().trim();
         item.description = $(element).find('.d-none.d-md-block.g-mb-5.g-mt-5.g-font-size-13.g-pr-120').text().trim();
         let salary = self.parseSalary($(element).find('.d-none.d-md-inline.g-mt-0.g-color-gray-dark-v5').html());
