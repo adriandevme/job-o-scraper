@@ -15,6 +15,8 @@ export class Offer { //@TODO add default
   readonly salary_min: number;
   readonly salary_max: number;
   readonly salary_currency: string;
+  readonly publish_date: Date;
+  readonly publish_date_info: string;
   readonly extractor: string;
   readonly extractor_logo: string; //@TODO to move when I'll interface the class
   //readonly createdAt: Date;
@@ -37,6 +39,8 @@ export class Offer { //@TODO add default
     this.salary_max = Number(data.salary_max) ? Number(data.salary_max) : 0;
     this.salary_min = Number(data.salary_max) ? Number(data.salary_max) : 0;
     this.salary_currency = data.salary_currency;
+    this.publish_date = data.publish_date;
+    this.publish_date_info = data.publish_date_info;
     //this.createdAt = new Date(Date.now());
   }
 

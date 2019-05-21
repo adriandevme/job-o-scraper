@@ -37,7 +37,7 @@ class JobOScraper extends Command {
         // Save results
         const saved = await self.saveOffers(offers);
         // Generate report
-        if (saved){          
+        if (saved.length){          
           const reporter = new Reporter(config);
           await reporter.process(config.reporters, saved);
         }

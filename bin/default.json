@@ -1,5 +1,5 @@
 {
-    "urls": ["https://www.stackoverflow.com/jobs"],
+    "urls": ["https://www.stackoverflow.com/jobs?l=Spain"],
     "verbose": false,
     "reporters": ["email", "html"],
     "mail_config": {

@@ -33,54 +33,7 @@ export default class Stackoverflow { // @TODO create an interface
     if (!URL)
       throw(new Error('No URL defined'));
     else{
-      //logger.debug('Requesting URL page...', URL);
-      //let response = await request(URL);
-      //console.log(response);
 
-      // request(URL, function (error, response, body) {
-      //   //fs.writeFileSync('workana2.html', body);
-      //   logger.debug('Request OK, data received');
-      //   if (error)
-      //     cb(error)
-      //   else{ 
-      //     var $;          
-      //     try{
-      //       // this.title = data.title;
-      //       // this.description = data.description;
-      //       // this.url = data.url;
-      //       // this.price = data.price;
-      //       // this.priceTo = data.priceTo;
-      //       // this.hourly = data.hourly;
-
-      //       // Safely tries to parse object
-      //       $ = cheerio.load(body);
-      //       // Pase by league blocks
-      //       //logger.debug('Length', $('#_sport_0_types').children().length);            
-      //       //$('.marketHolderExpanded').each(function(i, element){
-      //       //logger.debug('Enumerating projects: ', $('.project-item').children().length);
-      //       $('.listing').each(function(i, element){
-      //         var item = {};
-      //         item.title = $(this).find('.project-title').text().trim();
-      //         item.description = $(this).find('.project-details').text().trim();
-      //         item.price = $(this).find('.budget').text().trim();
-      //         item.url = self.MAIN_URL + $(this).find('.project-title>a').attr('href'); 
-      //         item.company = 'Workana';
-      //         //console.log(item);
-      //         items.push(new Project(item));
-      //       });
-      //     }
-      //     catch(e){
-      //       error = e;
-      //     }
-      //     if (error)
-      //       cb(error);
-      //     else{
-      //       //Build            
-      //       logger.debug('Elements extracted:', items.length);
-      //       cb(null, items);
-      //     }
-      //   }
-      // });
     }    
   }
   
@@ -108,6 +61,7 @@ export default class Stackoverflow { // @TODO create an interface
         item.url = self.MAIN_URL + $(element).find('.job-details__spaced>a').attr('href'); 
         item.company = $(element).find('.-company>span:first-child').text().trim();
         item.location = $(element).find('.-company>span:nth-child(2)').text().trim().substring(3);
+        item.publish_date_info = $(element).find('.ps-absolute.pt2.r0.fc-black-500.fs-body1.pr12.t24').text().trim();
         item.id = item.company+'>>'+item.title;
         
         const offer = new Offer(item);

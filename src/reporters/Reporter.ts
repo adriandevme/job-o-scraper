@@ -1,7 +1,5 @@
 import Mailer from "./mailer/Mailer";
 import { Offer } from "../models/Offer";
-import { logger } from "handlebars";
-//import { logger } from 'handlebars';
 
 export default class Reporter {
   private config: any;
@@ -20,10 +18,10 @@ export default class Reporter {
       if (reporter == "email") {
         try {
           let info = await self.sendMail({
-            date: new Date(Date.now()),
+            date: self.parseDate(new Date(Date.now())),
             offers: self.parseOffers(offers)
           });
-          console.log("Report: Mail sent! ", info);
+          console.log("Report: Mail sent!");
         } catch (e) {
           console.error("Error generating mail report", e);
         }
@@ -75,16 +73,29 @@ export default class Reporter {
       try {
         parsedOffers.push({
           extractor_logo: offer.extractor_logo,
-          title: offer.title.substring(0, 40),
+          title: offer.title.substring(0, 100),
           company: offer.company,
           location: offer.location,
           salary_min: offer.salary_min / 1000 + "k" || null,
-          salary_max: offer.salary_max / 1000 + "k" || null
+          salary_max: offer.salary_max / 1000 + "k" || null,
+          salary_currency: offer.salary_currency,
+          publish_date_info: offer.publish_date_info,
+          url: offer.url
         });
       } catch (e) {
         console.error("Error parsing Offer", e);
       }
     }
     return parsedOffers;
+  }
+
+  private parseDate(date:Date){
+      return (
+        date.getDate().toString()+'-'+
+        date.getMonth().toString()+'-'+
+        date.getFullYear().toString()+' '+
+        date.getHours().toString()+':'+
+        date.getMinutes().toString()
+      )
   }
 }

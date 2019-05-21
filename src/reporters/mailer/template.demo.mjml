@@ -7,13 +7,14 @@
     <mj-section background-color="white" padding-bottom="20px" padding-top="20px">
       <mj-column width="100%">
         <mj-text font-family="Raleway" font-size="50px" color="black" padding-left="25px" padding-right="25px" padding-bottom="0px" padding-top="28px">Job-o-Scraper</mj-text>
-        <mj-text font-family="Raleway" align="left" font-size="18px" color="#ABCDEF">Job offers from 12/07/2019</mj-text>
+        <mj-text font-family="Raleway" align="left" font-size="18px" color="#ABCDEF">Offers from 12/07/2019</mj-text>
     </mj-section>
     <mj-divider border-color="#ffffff" border-width="2px" border-style="solid" padding-left="20px" padding-right="20px" padding-bottom="0px" padding-top="0"></mj-divider>
     <!-- Job Offer -->
     <mj-section background-color="#F8F8F8" padding-bottom="0px" padding-top="0">
       <mj-column padding="0" width="30%">
-        <mj-image padding-top="40px" align="left" src="https://www.workana.com/blog/wp-content/uploads/2018/10/Logo-Workana.png" />
+        <mj-image padding-top="33px" padding-bottom="0px" align="center" src="https://www.workana.com/blog/wp-content/uploads/2018/10/Logo-Workana.png" />
+        <mj-text font-family="Raleway" padding-top="0px" align="center" font-size="16px" font-weight="bold" line-height="16px"color="#ABCDEF">3 days ago</mj-text>
       </mj-column>
       <mj-column width="70%">
         <mj-text line-height="10px" color="#28587B" font-size="13px" font-family="Raleway" padding-top="28px">
