@@ -47,6 +47,7 @@ export default class Tecnoempleo { // @TODO create an interface
         item.url = $(element).find('h3>a').attr('href'); 
         item.company = $(element).find('h4>a').text().trim();
         item.location = $(element).find('.list-inline.g-mb-5>li:nth-child(2)').text().trim();
+        item.publish_date_info = $(element).find('.g-color-orange').text().trim();
         item.id = item.company+'>>'+item.title;
         
         const offer = new Offer(item);

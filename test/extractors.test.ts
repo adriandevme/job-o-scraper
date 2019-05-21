@@ -33,31 +33,31 @@ describe('job-o-scraper.extractors', () => {
       expect(result[0]).to.equal(mock_result[0]);
     });
 
-  // test
-  // .it('should crawl all items from StackOverflow website', async ctx => {
-  //   // Load HTML
-  //   const url = 'https://stackoverflow.com/jobs';
-  //   //let stacko_response = await axios.get(url as string); 
-  //   //fs.writeFileSync(path.join(__dirname, './mocks/stackoverflow.mock.html'), stacko_response.data);
-  //   let stacko_response = { data: fs.readFileSync(path.join(__dirname, './mocks/stackoverflow.mock.html'))};
-  //   let stacko = new Stacko.default({});      
-  //   let result = stacko.parseHTML(stacko_response.data);    
+  test.only()
+  .it('should crawl all items from StackOverflow website', async ctx => {
+    // Load HTML
+    const url = 'https://stackoverflow.com/jobs';
+    //let stacko_response = await axios.get(url as string); 
+    //fs.writeFileSync(path.join(__dirname, './mocks/stackoverflow.mock.html'), stacko_response.data);
+    let stacko_response = { data: fs.readFileSync(path.join(__dirname, './mocks/stackoverflow.mock.html'))};
+    let stacko = new Stacko.default({});      
+    let result = stacko.parseHTML(stacko_response.data);    
 
-  //   expect(result.length).to.be.equal(10);
-  // })
+    expect(result.length).to.be.equal(10);
+  })
 
-  // test
-  // .it('Test the Tecnoempleo extractor', async ctx => {
-  //   // Load HTML
-  //   //const url = 'https://www.tecnoempleo.com/busqueda-empleo.php';
-  //   //let tecnoempleo_response = await axios.get(url as string); 
-  //   //fs.writeFileSync(path.join(__dirname, './mocks/tecnoempleo.mock.html'), tecnoempleo_response.data);
-  //   let tecnoempleo_response = { data: fs.readFileSync(path.join(__dirname, './mocks/tecnoempleo.mock.html'))};
-  //   let tecnoempleo = new Tecnoempleo.default({});      
-  //   let result = tecnoempleo.parseHTML(tecnoempleo_response.data);    
+  test
+  .it('Test the Tecnoempleo extractor', async ctx => {
+    // Load HTML
+    //const url = 'https://www.tecnoempleo.com/busqueda-empleo.php';
+    //let tecnoempleo_response = await axios.get(url as string); 
+    //fs.writeFileSync(path.join(__dirname, './mocks/tecnoempleo.mock.html'), tecnoempleo_response.data);
+    let tecnoempleo_response = { data: fs.readFileSync(path.join(__dirname, './mocks/tecnoempleo.mock.html'))};
+    let tecnoempleo = new Tecnoempleo.default({});      
+    let result = tecnoempleo.parseHTML(tecnoempleo_response.data);    
 
-  //   expect(result.length).to.be.equal(10);
-  // })
+    expect(result.length).to.be.equal(10);
+  })
 
   // test
   //   .it('Offer model should be well formed', ctx => {
