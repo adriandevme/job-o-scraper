@@ -15,7 +15,7 @@
     <mj-section background-color="#F8F8F8" padding-bottom="0px" padding-top="0">
       <mj-column padding="0px" width="30%">
         <mj-image padding-top="33px" padding-bottom="0px" align="left" src="{{this.extractor_logo}}" />
-        <mj-text font-family="Raleway" padding-top="0px" align="center" font-size="16px" font-weight="bold" line-height="14px"color="#ABCDEF">{{this.publish_date_info}}</mj-text>
+        <mj-text font-family="Raleway" padding-top="8px" align="left" font-size="16px" font-weight="bold" line-height="14px"color="#ABCDEF">{{this.publish_date_info}}</mj-text>
       </mj-column>
       <mj-column width="70%">
         <mj-text line-height="22px" color="#28587B" font-size="13px" font-family="Raleway" padding-top="28px">

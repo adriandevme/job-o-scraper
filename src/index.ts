@@ -31,16 +31,20 @@ class JobOScraper extends Command {
       const config = this.parseConf(path.join(__dirname, flags.conf));
       this.log('Reading conf file..');
       //Read URLs
+      let all:Array<Offer> = [];
       for (const url of config.urls){
         // Get offers
-        const offers = await self.processURL(url)
+        let offers:Array<Offer> = await self.processURL(url)
         // Save results
-        const saved = await self.saveOffers(offers);
-        // Generate report
-        if (saved.length){          
-          const reporter = new Reporter(config);
-          await reporter.process(config.reporters, saved);
-        }
+        let saved:Array<Offer> = await self.saveOffers(offers);
+        all = all.concat(saved);
+      }
+      // Info
+      console.log('% offers found in total', all.length);
+      // Generate report
+      if (all.length){          
+        const reporter = new Reporter(config);
+        await reporter.process(config.reporters, all);
       }
     }
     else if (flags.url){

@@ -59,16 +59,7 @@ export default class Reporter {
    */
   private parseOffers(offers: Array<Offer>) {
     let parsedOffers: Array<any> = [];
-    // readonly id: string; //@WATCHOUT
-    // readonly title: string;
-    // readonly description: string;
-    // readonly url: string;
-    // readonly company: string;
-    // readonly location: string;
-    // readonly salary_min: number;
-    // readonly salary_max: number;
-    // readonly salary_currency: string;
-    // readonly extractor: string;
+
     for (let offer of offers) {
       try {
         parsedOffers.push({
