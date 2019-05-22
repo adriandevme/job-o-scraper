@@ -67,8 +67,8 @@ export default class Reporter {
           title: offer.title.substring(0, 100),
           company: offer.company,
           location: offer.location,
-          salary_min: offer.salary_min / 1000 + "k" || null,
-          salary_max: offer.salary_max / 1000 + "k" || null,
+          salary_min: offer.salary_min ? offer.salary_min/ 1000 + "k" : undefined,
+          salary_max: offer.salary_max ? offer.salary_max/ 1000 + "k" : undefined,
           salary_currency: offer.salary_currency,
           publish_date_info: offer.publish_date_info,
           url: offer.url

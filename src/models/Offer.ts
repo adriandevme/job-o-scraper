@@ -12,8 +12,8 @@ export class Offer { //@TODO add default
   readonly url: string;
   readonly company: string;
   readonly location: string;
-  readonly salary_min: number;
-  readonly salary_max: number;
+  readonly salary_min: number | undefined;
+  readonly salary_max: number | undefined;
   readonly salary_currency: string;
   readonly publish_date: Date;
   readonly publish_date_info: string;
@@ -36,8 +36,8 @@ export class Offer { //@TODO add default
     this.url = data.url;
     this.company = data.company;
     this.location = data.location;
-    this.salary_max = Number(data.salary_max) ? Number(data.salary_max) : 0;
-    this.salary_min = Number(data.salary_max) ? Number(data.salary_max) : 0;
+    this.salary_max = Number(data.salary_max) || undefined;
+    this.salary_min = Number(data.salary_max) || undefined;
     this.salary_currency = data.salary_currency;
     this.publish_date = data.publish_date;
     this.publish_date_info = data.publish_date_info;
