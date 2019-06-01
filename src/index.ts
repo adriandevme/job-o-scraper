@@ -11,10 +11,13 @@ class JobOScraper extends Command {
   static description = 'describe the command here'
 
   static flags = {
+    // VERSION
+    version: flags.version({char: 'v'}),
+    help: flags.help({char: 'h'}),
     // URL, 
-    url: flags.string({char: 'u', description: 'URL: URL to scrap'}),    
+    // url: flags.string({char: 'u', description: 'URL: URL to scrap'}),    
     // CONFIG,
-    conf: flags.string({char: 'c', description: 'CONFIGURATION FILE: Filepath to the configuration file '}),
+    conf: flags.string({char: 'c', description: 'Filepath to the configuration file '}),
   }
 
   static args = [{name: 'file'}]
@@ -25,6 +28,7 @@ class JobOScraper extends Command {
 
     // Init local ddbb
     await storage.init({dir: path.join(__dirname, '../.node-persist')}); //@TODO should init with a proper config
+
 
     if (flags.conf){
       // Run from conf file
