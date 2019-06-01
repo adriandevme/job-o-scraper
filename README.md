@@ -1,7 +1,7 @@
 job-o-scraper
 =============
 
-A tool for easy scraping Job Offer websites and get instant notifications.
+A tool for easy scraping Job offers and get instant notifications.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/job-o-scraper.svg)](https://npmjs.org/package/job-o-scraper)
