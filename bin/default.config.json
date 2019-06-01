@@ -1,11 +1,10 @@
 {
-    "urls": ["https://www.stackoverflow.com/jobs?l=Spain",
-      "https://www.tecnoempleo.com/busqueda-empleo.php"],
+    "urls": ["https://www.workana.com/jobs?ref=home_top_bar&page=1",
+        "https://www.stackoverflow.com/jobs",
+        "https://www.tecnoempleo.com/busqueda-empleo.php"],
     "verbose": false,
-    "reporters": ["email", "html"],
+    "reporters": ["mail"],
     "mail_config": {
-        "from": "adriandev.me@gmail.com",
-        "to": "adriandev.me@gmail.com",
         "host": "in-v3.mailjet.com",
         "port": 25,
         "secure": false,
