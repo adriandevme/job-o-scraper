@@ -9,7 +9,7 @@ import * as storage from 'node-persist';
 import Mailer from '../src/reporters/mailer/Mailer'
 import { Offer } from '../src/models/Offer';
 
-describe.only('job-o-scraper.reporters.mailer', () => {
+describe('job-o-scraper.reporters.mailer', () => {
   
   test
     .it('Build MJML from an offer list', ctx => {
@@ -103,7 +103,7 @@ describe.only('job-o-scraper.reporters.mailer', () => {
       expect(compiled).to.contain(offer3.title);  
   })
 
-  test.only()
+  test
   .it('Send a sample mail', ctx=>{
       //Offers
       let offers:Array<Offer>=[];

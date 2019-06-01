@@ -3,14 +3,13 @@ import { expect, test } from "@oclif/test";
 import cmd = require("../src");
 import * as fs from "fs";
 import * as path from "path";
-import axios from "axios";
 
 import { Offer } from "../src/models/Offer";
 import Workana from "../src/extractors/Workana";
 import Tecnoempleo from "../src/extractors/Tecnoempleo";
 import Stackoverflow from "../src/extractors/Stackoverflow";
 
-describe.only("job-o-scraper.extractors", () => {
+describe("job-o-scraper.extractors", () => {
   test.it("should extract all items from Workana website", async ctx => {
     // Load HTML
     // const url = 'https://www.workana.com/jobs?ref=home_top_bar&page=1';
@@ -84,5 +83,4 @@ describe.only("job-o-scraper.extractors", () => {
     // fs.writeFileSync(path.join(__dirname, './mocks/tecnoempleo_result.mock.json'), JSON.stringify(result), { flag: 'w' });
     expect(result).to.eql(mock_result);
   });
-
 });

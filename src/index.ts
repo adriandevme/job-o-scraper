@@ -36,49 +36,57 @@ class JobOScraper extends Command {
         // Get offers
         let offers:Array<Offer> = await self.processURL(url)
         // Save results
-        let saved:Array<Offer> = await self.saveOffers(offers);
-        all = all.concat(saved);
+        if (offers.length){
+          let saved:Array<Offer> = await self.saveOffers(offers);
+          all = all.concat(saved);
+        }
       }
       // Info
-      console.log('% offers found in total', all.length);
+      console.log(`${all.length} offers found in total`);
       // Generate report
-      if (all.length){          
+      if (all.length && config.reporters){          
         const reporter = new Reporter(config);
         await reporter.process(config.reporters, all);
       }
-    }
-    else if (flags.url){
-      // Run in URL mode
-      this.log('Reading single URL...', flags.url);
-      // Get offers
-      const offers = await this.processURL(flags.url)
-      // Save results
-      const saved = await this.saveOffers(offers);
-    }
+    }//@TODO Disabled till next version
+    // else if (flags.url){
+    //   // Run in URL mode
+    //   this.log('Reading single URL...', flags.url);
+    //   // Get offers
+    //   const offers = await this.processURL(flags.url)
+    //   // Save results
+    //   const saved = await this.saveOffers(offers);
+    // }
     else{
-      this.log('No param set, running in URL mode...');
+      this.log('Error, no params set!');
       //run --url="https://www.workana.com/jobs?ref=home_top_bar"
       //run --conf="../bin/default.json"
     }     
   }
 
   private async processURL(url:string){
+    var self = this;
     // Init array
-    let offers:Array<Offer>=[];
-    // Request to the server
+    let offers:Array<Offer>=[];    
     this.log('Requesting url ' + url);
-    const response = await axios.get(url as string);      
-    // Select parser
     try{
-      let parser_name:string = url.split('.')[1];
-      const ParserImport = await import('./extractors/'+parser_name);
-      let parser = new ParserImport.default({});
-      // Parse offers
-      offers = await parser.parseHTML(response.data as any);      
+      // Request to the server
+      const response = await axios.get(url as string);           
+      // Select parser
+      try{
+        let parser_name:string = url.split('.')[1];
+        const ParserImport = await import('./extractors/'+parser_name);
+        let parser = new ParserImport.default({});
+        // Parse offers
+        offers = await parser.parseHTML(response.data as any);      
+      }
+      catch(e){
+        this.log('Parser not defined for ' + url.split('.')[1], e);
+      }      
     }
     catch(e){
-      this.log('Parser not defined for ' + url.split('.')[1], e);
-    }
+      console.error('Error, url not found');
+    }    
     // Return
     return offers;
   }

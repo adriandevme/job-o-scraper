@@ -37,7 +37,7 @@ export class Offer { //@TODO add default
     this.company = data.company;
     this.location = data.location;
     this.salary_max = Number(data.salary_max) || undefined;
-    this.salary_min = Number(data.salary_max) || undefined;
+    this.salary_min = Number(data.salary_min) || undefined;
     this.salary_currency = data.salary_currency;
     this.publish_date = data.publish_date;
     this.publish_date_info = data.publish_date_info;
