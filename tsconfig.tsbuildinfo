@@ -225,6 +225,10 @@
         "version": "fe892fea1e75a442fffb4a604d7eeb451e858787a9f2f01c4e83bf12a3b5048d",
         "signature": "fe892fea1e75a442fffb4a604d7eeb451e858787a9f2f01c4e83bf12a3b5048d"
       },
+      "c:/repos/job-o-scraper/node_modules/@types/events/index.d.ts": {
+        "version": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
+        "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
+      },
       "c:/repos/job-o-scraper/node_modules/@types/node/child_process.d.ts": {
         "version": "f1086bf9854d882321f28c3691987832c97e5bb360f9bbc5e0e5a150fa055f56",
         "signature": "f1086bf9854d882321f28c3691987832c97e5bb360f9bbc5e0e5a150fa055f56"
@@ -462,11 +466,11 @@
         "signature": "5a3d1ecc866de4d14bd84e7168d3128edfdaa575368b47f4562885a49268de11"
       },
       "c:/repos/job-o-scraper/src/reporters/reporter.ts": {
-        "version": "c4e9e9f1c8a3c0e7512d4937ebfcd987f92e25b9e17df4660af571d59c7cfb0d",
+        "version": "cb6fed37199e0b3c2c6d7826347eab743363535f1813ce5523a8481f0bfd4987",
         "signature": "5fe133833a2415b04634cda6512d0951cdb2b639031ab64271abe3e936b42f84"
       },
       "c:/repos/job-o-scraper/src/index.ts": {
-        "version": "21714a55c15cce88868f3c542b5496ed427865adccddfd7d52fc3bcb07dbf599",
+        "version": "f4b925b3e63bcc7dafaac62717651a4e9409abcf11ecb99710ecb3cb8729d70e",
         "signature": "592a315a7b52f27ad03c2f7b6fbda63281f6d18727248d39e4abdaa0017db681"
       },
       "c:/repos/job-o-scraper/node_modules/@types/cheerio/index.d.ts": {
@@ -488,6 +492,14 @@
       "c:/repos/job-o-scraper/node_modules/@types/chai/index.d.ts": {
         "version": "c465afa89ac28f74167a2ee7c3c6eb8dd1245c2b3bdaa4704d58d35b932de4b7",
         "signature": "c465afa89ac28f74167a2ee7c3c6eb8dd1245c2b3bdaa4704d58d35b932de4b7"
+      },
+      "c:/repos/job-o-scraper/node_modules/@types/minimatch/index.d.ts": {
+        "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633"
+      },
+      "c:/repos/job-o-scraper/node_modules/@types/glob/index.d.ts": {
+        "version": "d852d6282c8dc8156d26d6bda83ab4bde51fee05ba2fe0ecdc165ddda009d3ee",
+        "signature": "d852d6282c8dc8156d26d6bda83ab4bde51fee05ba2fe0ecdc165ddda009d3ee"
       },
       "c:/repos/job-o-scraper/node_modules/@types/lodash/common/common.d.ts": {
         "version": "826e226ef4293d2e692c796d7cc81c94f353c57fd6016685b79d68134e5df047",
@@ -831,6 +843,10 @@
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "c:/repos/job-o-scraper/node_modules/@types/node/buffer.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/repos/job-o-scraper/node_modules/@types/events/index.d.ts": [
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -1309,6 +1325,17 @@
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "c:/repos/job-o-scraper/node_modules/@types/chai/index.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/repos/job-o-scraper/node_modules/@types/minimatch/index.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/repos/job-o-scraper/node_modules/@types/glob/index.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/events.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/minimatch/index.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -1871,6 +1898,13 @@
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/repos/job-o-scraper/node_modules/@types/glob/index.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/events.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/minimatch/index.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/index.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/repos/job-o-scraper/node_modules/@types/cheerio/index.d.ts": [
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/index.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
@@ -2040,6 +2074,10 @@
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "c:/repos/job-o-scraper/node_modules/@types/node/buffer.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "c:/repos/job-o-scraper/node_modules/@types/events/index.d.ts": [
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -2441,6 +2479,10 @@
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "c:/repos/job-o-scraper/node_modules/@types/minimatch/index.d.ts": [
+        "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
+        "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "c:/repos/job-o-scraper/node_modules/@types/chai/index.d.ts": [
         "c:/repos/job-o-scraper/node_modules/@types/node/util.d.ts",
         "c:/repos/job-o-scraper/node_modules/@types/node/ts3.2/util.d.ts"
@@ -2527,6 +2569,7 @@
       "c:/repos/job-o-scraper/node_modules/@types/node/assert.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/node/async_hooks.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/node/buffer.d.ts",
+      "c:/repos/job-o-scraper/node_modules/@types/events/index.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/node/child_process.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/node/cluster.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/node/console.d.ts",
@@ -2593,6 +2636,8 @@
       "c:/repos/job-o-scraper/src/extractors/tecnoempleo.ts",
       "c:/repos/job-o-scraper/src/extractors/workana.ts",
       "c:/repos/job-o-scraper/node_modules/@types/chai/index.d.ts",
+      "c:/repos/job-o-scraper/node_modules/@types/minimatch/index.d.ts",
+      "c:/repos/job-o-scraper/node_modules/@types/glob/index.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/lodash/common/common.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/lodash/common/array.d.ts",
       "c:/repos/job-o-scraper/node_modules/@types/lodash/common/collection.d.ts",

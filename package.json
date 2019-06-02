@@ -32,6 +32,7 @@
     "@types/node": "^10.14.5",
     "@types/node-persist": "0.0.33",
     "chai": "^4.2.0",
+    "cpy-cli": "^2.0.0",
     "mocha": "^5.2.0",
     "nyc": "^14.1.1",
     "rimraf": "^2.6.3",
@@ -44,7 +45,7 @@
   },
   "files": [
     "/bin",
-    "/lib"   
+    "/lib"
   ],
   "homepage": "https://github.com/adriandev.me/job-o-scraper",
   "keywords": [
@@ -58,7 +59,7 @@
   "repository": "adriandev.me/job-o-scraper",
   "scripts": {
     "posttest": "tslint -p test -t stylish",
-    "prepack": "rimraf lib && tsc -b",
+    "prepack": "rimraf lib && tsc -b && copyfiles -u 1 src/**/*.mjml lib",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "test:dev": "mocha \"test/**/*.test.ts\""
   },
