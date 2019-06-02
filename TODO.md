@@ -5,4 +5,4 @@
 - Descubrir como depurar la aplicacion con visual studio
 
 
-- Te quedaste creando el metodo estatico 'upsertAll'
+- To HTML

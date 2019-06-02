@@ -34,7 +34,7 @@ class JobOScraper extends Command {
 
     if (flags.conf) {
       // Run from conf file
-      const config = this.parseConf(path.join(__dirname, flags.conf));
+      const config = this.parseConf(path.join(flags.conf));
       this.log("Reading conf file..");
       //Read URLs
       let all: Array<Offer> = [];
