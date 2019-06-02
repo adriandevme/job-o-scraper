@@ -41,7 +41,7 @@ export default class Reporter {
     let html = mailer.generateHTML(mail_data);
     let info;
     try {
-      info = await mailer.sendMail(
+      info = await mailer.sendMail( //@TODO require this
         self.config.mail_config.from,
         self.config.mail_config.to,
         "✔ Job-o-scraper results: " + mail_data.date,

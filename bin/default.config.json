@@ -3,8 +3,10 @@
         "https://www.stackoverflow.com/jobs",
         "https://www.tecnoempleo.com/busqueda-empleo.php"],
     "verbose": false,
-    "reporters": ["mail"],
+    "reporters": ["email"],
     "mail_config": {
+        "from": "adriandev.me@gmail.com",
+        "to": "adriandev.me@gmail.com",
         "host": "in-v3.mailjet.com",
         "port": 25,
         "secure": false,

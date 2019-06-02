@@ -81,8 +81,7 @@ class JobOScraper extends Command {
       // Select parser
       try {
         let parser_name: string = url.split(".")[1];
-        parser_name = parser_name.charAt(0).toUpperCase() + parser_name.slice(1); //Capitalize
-        console.log(parser_name);
+        parser_name = parser_name.charAt(0).toUpperCase() + parser_name.slice(1); //Capitalize        
         const ParserImport = await import("./extractors/" + parser_name);
         let parser = new ParserImport.default({});
         // Parse offers
