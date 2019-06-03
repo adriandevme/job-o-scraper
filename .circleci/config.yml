@@ -17,14 +17,17 @@ jobs:
       # - run: chown -R $USER:$USER /root/cli
       # - run: ./bin/run --version
       # - run: ./bin/run --help
+      # - run:
+      #     name: Testing
+      #     command: npm test
       - run:
           name: Testing
-          command: npm test
-      - run:
-          name: Submitting code coverage to codecov
-          command: |
-            ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
-            curl -s https://codecov.io/bash | bash
+          command: mocha --forbid-only "test/**/*.test.ts"
+      # - run:
+      #     name: Submitting code coverage to codecov
+      #     command: |
+      #       ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
+      #       curl -s https://codecov.io/bash | bash
   node-8:
     <<: *test
     docker:
