@@ -11,17 +11,20 @@ jobs:
           keys:
             - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "package-lock.json"}}
             - v1-npm-{{checksum ".circleci/config.yml"}}
-      - run: sudo npm install -g yarn && yarn install
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run: chown -R $USER:$USER ~/cli
       - run: ./bin/run --version
       - run: ./bin/run --help
       - run:
           name: Testing
           command: npm test
-      # - run:
-      #     name: Submitting code coverage to codecov
-      #     command: |
-      #       ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
-      #       curl -s https://codecov.io/bash | bash
+      - run:
+          name: Submitting code coverage to codecov
+          command: |
+            ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
+            curl -s https://codecov.io/bash | bash
   node-8:
     <<: *test
     docker:
