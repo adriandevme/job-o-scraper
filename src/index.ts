@@ -8,22 +8,15 @@ import { Offer } from "./models/Offer";
 import Reporter from "./reporters/Reporter";
 
 class JobOScraper extends Command {
-  static description = "describe the command here";
+  static description = "Jobo: scrap job offers";
 
   static flags = {
     // VERSION
     version: flags.version({ char: "v" }),
-    help: flags.help({ char: "h" }),
-    // URL,
-    // url: flags.string({char: 'u', description: 'URL: URL to scrap'}),
-    // CONFIG,
-    conf: flags.string({
-      char: "c",
-      description: "Filepath to the configuration file "
-    })
+    help: flags.help({ char: "h" })
   };
 
-  static args = [{ name: "file" }];
+  static args = [{ name: "conf_file" }];
 
   async run() {
     const { args, flags } = this.parse(JobOScraper);
@@ -31,10 +24,9 @@ class JobOScraper extends Command {
 
     // Init local ddbb
     await storage.init({ dir: path.join(__dirname, "../.node-persist") }); //@TODO should init with a proper config
-
-    if (flags.conf) {
+    if (args.conf_file) {
       // Run from conf file
-      const config = this.parseConf(path.join(flags.conf));
+      const config = this.parseConf(path.join(args.conf_file));
       this.log("Reading conf file..");
       //Read URLs
       let all: Array<Offer> = [];
@@ -54,17 +46,8 @@ class JobOScraper extends Command {
         const reporter = new Reporter(config);
         await reporter.process(config.reporters, all);
       }
-    } //@TODO Disabled till next version
-    // else if (flags.url){
-    //   // Run in URL mode
-    //   this.log('Reading single URL...', flags.url);
-    //   // Get offers
-    //   const offers = await this.processURL(flags.url)
-    //   // Save results
-    //   const saved = await this.saveOffers(offers);
-    // }
-    else {
-      this.log("Error, no params set!");
+    } else {
+      this.log("Error, no config url provided");
       //run --url="https://www.workana.com/jobs?ref=home_top_bar"
       //run --conf="../bin/default.json"
     }
@@ -81,7 +64,8 @@ class JobOScraper extends Command {
       // Select parser
       try {
         let parser_name: string = url.split(".")[1];
-        parser_name = parser_name.charAt(0).toUpperCase() + parser_name.slice(1); //Capitalize        
+        parser_name =
+          parser_name.charAt(0).toUpperCase() + parser_name.slice(1); //Capitalize
         const ParserImport = await import("./extractors/" + parser_name);
         let parser = new ParserImport.default({});
         // Parse offers

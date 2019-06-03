@@ -10,8 +10,21 @@ A tool for easy scraping Job offers and get instant notifications.
 [![Downloads/week](https://img.shields.io/npm/dw/job-o-scraper.svg)](https://npmjs.org/package/job-o-scraper)
 [![License](https://img.shields.io/npm/l/job-o-scraper.svg)](https://github.com/adriandev.me/job-o-scraper/blob/master/package.json)
 
-<!-- toc -->
-# Usage
+<!-- Install -->
+### Install
+```bash
+npm install job-o-scraper -g
+```
 <!-- usage -->
 # Commands
+```bash
+Jobo: scrap job offers
+
+USAGE
+  $ jobo [CONF_FILE]
+
+OPTIONS
+  -h, --help     show CLI help
+  -v, --version  show CLI version
+```
 <!-- commands -->
