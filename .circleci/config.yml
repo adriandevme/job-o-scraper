@@ -15,9 +15,7 @@ jobs:
           name: Install dependencies
           command: npm install
       - run: chown -R $USER:$USER ~/cli
-      - run: ls
-      - run: pwd
-      - run: ./bin/run --version
+      - run: chown -R $USER:$USER ~/cli && ./bin/run --version
       - run: ./bin/run --help
       - run:
           name: Testing
