@@ -16,31 +16,22 @@ describe('job-o-scraper', () => {
     .stdout()
     .do(() => cmd.run([]))
     .it('runs with no params', ctx => {      
-      expect(ctx.stdout).to.contain('Error, no params set!');
-    })
-
-  test
-    .skip()
-    .stdout()
-    .do(() => cmd.run(['--url', "https://www.stackoverflow.com/jobs?l=Spain"]))
-    .it('performs a manual search using URL flag', ctx => {
-      //@TODO clear database before
-      expect(ctx.stdout).to.contain('Reading single URL... https://www.stackoverflow.com/jobs?l=Spain\nRequesting url https://www.stackoverflow.com/jobs?l=Spain\nSuccess!')// 0 new offer(s) found and saved\n');
+      expect(ctx.stdout).to.contain("Error, no config url provided");
     })
   
   test    
     .stdout()
-    .do(() => cmd.run(['--conf', "../test/config/single_url.config.json"]))
+    .do(() => cmd.run([path.join(__dirname,"../test/config/single_url.config.json")]))
     .it('extract a single url', ctx => {      
       expect(ctx.stdout).to.contain('Reading conf file..');
       expect(ctx.stdout).to.contain('Requesting url https://www.stackoverflow.com/jobs?l=Spain');
-      expect(ctx.stdout).to.contain('Success! 0 new offer(s) found and saved');
-      expect(ctx.stdout).to.contain('0 offers found in total');      
+      expect(ctx.stdout).to.contain('new offer(s) found and saved');
+      expect(ctx.stdout).to.contain('offers found in total');      
     })
 
     test    
     .stdout()
-    .do(() => cmd.run(['--conf', "../test/config/unexisting_url.config.json"]))
+    .do(() => cmd.run([path.join(__dirname,"../test/config/unexisting_url.config.json")]))    
     .it('tries to extract unexisting url', ctx => {      
       expect(ctx.stdout).to.contain('Reading conf file..');
       expect(ctx.stdout).to.contain('Requesting url https://www.thisisafakeurl.com');
