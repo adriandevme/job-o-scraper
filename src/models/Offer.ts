@@ -1,67 +1,89 @@
 /**
  * Requires
  */
-import * as fs from 'fs';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
-import * as storage from 'node-persist';
+import axios from "axios";
+import * as storage from "node-persist";
 
-export class Offer { 
-  // Vars
+export class Offer { //@TODO add default
+
+  readonly id: string; //@WATCHOUT
   readonly title: string;
   readonly description: string;
-  readonly price: number;
   readonly url: string;
   readonly company: string;
-  readonly id: string; //@WATCHOUT 
+  readonly location: string;
+  readonly salary_min: number | undefined;
+  readonly salary_max: number | undefined;
+  readonly salary_currency: string;
+  readonly publish_date: Date;
+  readonly publish_date_info: string;
+  readonly extractor: string;
+  readonly extractor_logo: string; //@TODO to move when I'll interface the class
+  //readonly createdAt: Date;
 
-  static parser_ref: string = 'workana';
-  
-  // Constructor
+  /**
+   * Offer constructor
+   * @param data Object that contains the offer data
+   */
   constructor(data: any) {
-      if (!data.id)
-        throw new Error('Error, ID cannot be undefined');
-    this.id = data.id;
+    //Build ID
+    this.id = data.company + data.title;
+    //Assign fields
+    this.extractor = data.extractor;
+    this.extractor_logo = data.extractor_logo;    
     this.title = data.title;
     this.description = data.description;
-    this.price = Number(data.price); //@TODO cast the value
     this.url = data.url;
     this.company = data.company;
+    this.location = data.location;
+    this.salary_max = Number(data.salary_max) || undefined;
+    this.salary_min = Number(data.salary_min) || undefined;
+    this.salary_currency = data.salary_currency;
+    this.publish_date = data.publish_date;
+    this.publish_date_info = data.publish_date_info;
+    //this.createdAt = new Date(Date.now());
   }
 
+  /**
+   * Tries to upsert this object
+   */
+  public async upsert() {
+    const self = this;
+    //Find the item
+    let found = await storage.getItem(self.id);
 
-  public async upsert(){
-      const self = this;
-      //Find the item
-      let found = await storage.getItem(self.id);
-  
-      if (!found){
-        await self.save();
-        return self;
-      }
-      else
-        return null;
+    if (!found) {
+      await self.save();
+      return self;
+    } else return null;
   }
 
-  //Default search are performed by id
-  public static async findOne(id:string){
-      return storage.getItem(id);
+  /**
+   * Returns a single Offer by ID
+   * @param id Offer ID
+   */
+  public static async findOne(id: string) {
+    return storage.getItem(id);
   }
 
-  //Functions
-  public static async list(){
-    return storage.values()
+  /**
+   * List all offers saved
+   */
+  public static async list() {
+    return storage.values();
   }
 
-  public async save(){
-      let saved;
-      try{
-        await storage.setItem(this.id, this);
-        saved = this;
-      }
-      catch(e){
-          console.log(e);
-      }
-      return saved;
+  /**
+   * Saves the current offer
+   */
+  public async save() {
+    let saved;
+    try {
+      await storage.setItem(this.id, this);
+      saved = this;
+    } catch (e) {
+      console.log(e);
+    }
+    return saved;
   }
 }

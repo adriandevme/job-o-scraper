@@ -1,19 +1,41 @@
+import * as fs from 'fs'; 
+import * as path from "path";
 import {expect, test} from '@oclif/test'
-
+import * as nock from 'nock';
 import cmd = require('../src')
 
-describe.skip('job-o-scraper', () => {
-  test
+
+const scope = nock('https://www.stackoverflow.com')
+  .get('/jobs?l=Spain')
+  .reply(200, fs.readFileSync(
+    path.join(__dirname, "./mocks/stackoverflow.mock.html")
+  ));
+
+describe('job-o-scraper', () => {
+  test    
     .stdout()
     .do(() => cmd.run([]))
-    .it('simply runs', ctx => {
-      expect(ctx.stdout).to.contain('Job-o CLI')
+    .it('runs with no params', ctx => {      
+      expect(ctx.stdout).to.contain("Error, no config url provided");
+    })
+  
+  test    
+    .stdout()
+    .do(() => cmd.run([path.join(__dirname,"../test/config/single_url.config.json")]))
+    .it('extract a single url', ctx => {      
+      expect(ctx.stdout).to.contain('Reading conf file..');
+      expect(ctx.stdout).to.contain('Requesting url https://www.stackoverflow.com/jobs?l=Spain');
+      expect(ctx.stdout).to.contain('new offer(s) found and saved');
+      expect(ctx.stdout).to.contain('offers found in total');      
     })
 
-  test
+    test    
     .stdout()
-    .do(() => cmd.run(['--url', 'https://www.tecnoempleo.com/busqueda-empleo.php?te=javascript&cp=,29,&pr=,234,#buscador-ofertas-ini']))
-    .it('performs a manual search', ctx => {
-      expect(ctx.stdout).to.contain('todo mock data');
-    })
-})
+    .do(() => cmd.run([path.join(__dirname,"../test/config/unexisting_url.config.json")]))    
+    .it('tries to extract unexisting url', ctx => {      
+      expect(ctx.stdout).to.contain('Reading conf file..');
+      expect(ctx.stdout).to.contain('Requesting url https://www.thisisafakeurl.com');
+      //expect(ctx.errorstdout?).to.contain('Error, url not found');
+      expect(ctx.stdout).to.contain('0 offers found in total');      
+    })    
+  })

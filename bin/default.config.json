@@ -1,0 +1,18 @@
+{
+    "urls": ["https://www.workana.com/jobs?ref=home_top_bar&page=1",
+        "https://www.stackoverflow.com/jobs",
+        "https://www.tecnoempleo.com/busqueda-empleo.php"],
+    "verbose": false,
+    "reporters": [],
+    "mail_config": {
+        "from": "adriandev.me@gmail.com",
+        "to": "adriandev.me@gmail.com",
+        "host": "in-v3.mailjet.com",
+        "port": 25,
+        "secure": false,
+        "auth": {
+          "user": "76b8444375988329c5240918eda58254",
+          "pass": "8ceb8d3d5d37ed7841323ec541745a07"
+        }
+    }
+}

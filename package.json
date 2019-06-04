@@ -1,23 +1,27 @@
 {
   "name": "job-o-scraper",
-  "description": "A tool for easy scraping Job Offer websites and get instant notifications.",
-  "version": "0.1.0",
+  "description": "A simple tool to easily scrap Job offers from websites and get instant notifications.",
+  "version": "1.0.0",
   "author": "DESKTOP-42P6MA3\\adriandev.me",
   "bin": {
     "jobo": "./bin/run"
   },
   "bugs": "https://github.com/adriandev.me/job-o-scraper/issues",
   "dependencies": {
-    "@oclif/command": "^1.5.12",
-    "@oclif/config": "^1.12.12",
-    "@oclif/plugin-help": "^2.1.6",
-    "@types/cheerio": "^0.22.11",
-    "@types/request": "^2.48.1",
-    "axios": "^0.18.0",
-    "cheerio": "^1.0.0-rc.3",
-    "node-persist": "^3.0.4",
-    "request": "^2.88.0",
-    "sqlite": "^3.0.3",
+    "@oclif/command": "1.5.12",
+    "@oclif/config": "1.12.12",
+    "@oclif/plugin-help": "2.1.6",
+    "@types/cheerio": "0.22.11",
+    "@types/mjml": "^4.0.2",
+    "@types/nock": "^10.0.3",
+    "@types/nodemailer": "^6.1.0",
+    "axios": "0.18.0",
+    "cheerio": "1.0.0-rc.3",
+    "handlebars": "^4.1.2",
+    "mjml": "^4.4.0-beta.1",
+    "nock": "^10.0.6",
+    "node-persist": "3.0.4",
+    "nodemailer": "^6.1.1",
     "tslib": "^1.9.3"
   },
   "devDependencies": {
@@ -28,8 +32,10 @@
     "@types/node": "^10.14.5",
     "@types/node-persist": "0.0.33",
     "chai": "^4.2.0",
+    "copyfiles": "^2.1.0",
+    "cpy-cli": "^2.0.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.3.0",
+    "nyc": "^14.1.1",
     "rimraf": "^2.6.3",
     "ts-node": "^8.0.3",
     "tslint": "^5.15.0",
@@ -44,7 +50,7 @@
   ],
   "homepage": "https://github.com/adriandev.me/job-o-scraper",
   "keywords": [
-    "oclif"
+    "oclif", "scraper", "job offers", "stackoverflow", "workana"
   ],
   "license": "MIT",
   "main": "lib/index.js",
@@ -54,7 +60,7 @@
   "repository": "adriandev.me/job-o-scraper",
   "scripts": {
     "posttest": "tslint -p test -t stylish",
-    "prepack": "rimraf lib && tsc -b",
+    "prepack": "rimraf lib && tsc -b && copyfiles -u 1 src/**/*.mjml lib",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "test:dev": "mocha \"test/**/*.test.ts\""
   },

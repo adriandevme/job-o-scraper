@@ -1,60 +1,100 @@
-import {Command, flags} from '@oclif/command'
-import axios from 'axios';
-//const storage = require('node-persist');
-import * as storage from 'node-persist';
+import { Command, flags } from "@oclif/command";
+import axios from "axios";
+import * as storage from "node-persist";
+import * as fs from "fs";
+import * as path from "path";
 
-import Workana = require('./extractors/Workana');
-import { Offer } from './models/Offer';
+import { Offer } from "./models/Offer";
+import Reporter from "./reporters/Reporter";
 
 class JobOScraper extends Command {
-  static description = 'describe the command here'
+  static description = "Jobo: scrap job offers";
 
   static flags = {
-    // URL mode, 
-    url: flags.string({char: 'u', description: 'URL MODE: URL to scrap'}),
-    // WORKER mode
-    conf: flags.string({char: 'w', description: 'WORKER MODE: Path to the configuration file'}),
-  }
+    // VERSION
+    version: flags.version({ char: "v" }),
+    help: flags.help({ char: "h" })
+  };
 
-  static args = [{name: 'file'}]
+  static args = [{ name: "conf_file" }];
 
   async run() {
-    const {args, flags} = this.parse(JobOScraper)
+    const { args, flags } = this.parse(JobOScraper);
+    const self = this;
 
-    if (flags.url){
-      // Run in URL mode
-      this.log('Running in URL mode...', flags.url);
-      // Init ddbb
-      await storage.init(); //@TODO should init with a proper config
-      // Request to the server
-      const response = await axios.get(flags.url as string);      
-      let workana = new Workana.Workana({});
-      const offers = await workana.parseHTML(response.data as any);      
-      // Save results
-      let e=0;
-      for (const offer of offers){
-        let o = await offer.upsert();
-        if (o)
-          e++; //@TODO waat
+    // Init local ddbb
+    await storage.init({ dir: path.join(__dirname, "../.node-persist") }); //@TODO should init with a proper config
+    if (args.conf_file) {
+      // Run from conf file
+      const config = this.parseConf(path.join(args.conf_file));
+      this.log("Reading conf file..");
+      //Read URLs
+      let all: Array<Offer> = [];
+      for (const url of config.urls) {
+        // Get offers
+        let offers: Array<Offer> = await self.processURL(url);
+        // Save results
+        if (offers.length) {
+          let saved: Array<Offer> = await self.saveOffers(offers);
+          all = all.concat(saved);
+        }
       }
-      //const found = await Offer.upsertAll(offers);      
-      this.log(`Success! ${e} new offer(s) found from Workana site`);
+      // Info
+      console.log(`${all.length} offers found in total`);
+      // Generate report
+      if (all.length && config.reporters) {
+        const reporter = new Reporter(config);
+        await reporter.process(config.reporters, all);
+      }
+    } else {
+      this.log("Error, no config url provided");
+      //run --url="https://www.workana.com/jobs?ref=home_top_bar"
+      //run --conf="../bin/default.json"
     }
-    else if (flags.conf){
-      // Run in WORKER mode
-      this.log('Running in WORKER mode...')
-    }
-    else{
-      this.log('No param set, running in URL mode...');
-      //run --url=https://www.workana.com/jobs?ref=home_top_bar
-    }     
+  }
 
-    // const name = flags.name || 'world'
-    // this.log(`hello ${name} from .\\src\\commands\\hello.ts`)
-    // if (args.file && flags.force) {
-    //   this.log(`you input --force and --file: ${args.file}`)
-    // }
+  private async processURL(url: string) {
+    var self = this;
+    // Init array
+    let offers: Array<Offer> = [];
+    this.log("Requesting url " + url);
+    try {
+      // Request to the server
+      const response = await axios.get(url as string);
+      // Select parser
+      try {
+        let parser_name: string = url.split(".")[1];
+        parser_name =
+          parser_name.charAt(0).toUpperCase() + parser_name.slice(1); //Capitalize
+        const ParserImport = await import("./extractors/" + parser_name);
+        let parser = new ParserImport.default({});
+        // Parse offers
+        offers = await parser.parseHTML(response.data as any);
+      } catch (e) {
+        this.log("Parser not defined for " + url.split(".")[1], e);
+      }
+    } catch (e) {
+      console.log("Error, url not found");
+    }
+    // Return
+    return offers;
+  }
+
+  private async saveOffers(offers: Array<Offer>) {
+    let upserted: Array<Offer> = [];
+    for (const offer of offers) {
+      let o = await offer.upsert();
+      if (o) upserted.push(o);
+    }
+    // Log
+    this.log(`Success! ${upserted.length} new offer(s) found and saved`);
+    return upserted;
+  }
+
+  private parseConf(conf_url: any) {
+    //@TODO parse
+    return JSON.parse(fs.readFileSync(conf_url, "utf8"));
   }
 }
 
-export = JobOScraper
+export = JobOScraper;
