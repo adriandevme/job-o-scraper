@@ -1,5 +1,6 @@
 import Mailer from "./mailer/Mailer";
 import { Offer } from "../models/Offer";
+import * as moment from 'moment';
 
 export default class Reporter {
   private config: any;
@@ -18,7 +19,7 @@ export default class Reporter {
       if (reporter == "email") {
         try {
           let info = await self.sendMail({
-            date: self.parseDate(new Date(Date.now())),
+            date: moment().format("YYYY-MM-DD HH:mm"),
             offers: self.parseOffers(offers)
           });
           console.log("Report: Mail sent!");
@@ -26,7 +27,7 @@ export default class Reporter {
           console.error("Error generating mail report", e);
         }
       }
-      //if (reporter == 'html')
+      if (reporter == 'html')
       //@TODO process HTML
     }
   }
@@ -78,15 +79,5 @@ export default class Reporter {
       }
     }
     return parsedOffers;
-  }
-
-  private parseDate(date:Date){
-      return (
-        date.getDate().toString()+'-'+
-        date.getMonth().toString()+'-'+
-        date.getFullYear().toString()+' '+
-        date.getHours().toString()+':'+
-        date.getMinutes().toString()
-      )
   }
 }
