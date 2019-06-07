@@ -1,6 +1,9 @@
 import Mailer from "./mailer/Mailer";
 import { Offer } from "../models/Offer";
 import * as moment from 'moment';
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
 
 export default class Reporter {
   private config: any;
@@ -16,19 +19,40 @@ export default class Reporter {
   public async process(reporters: Array<string>, offers: Array<Offer>) {
     let self = this;
     for (let reporter of reporters) {
-      if (reporter == "email") {
-        try {
-          let info = await self.sendMail({
-            date: moment().format("YYYY-MM-DD HH:mm"),
-            offers: self.parseOffers(offers)
-          });
-          console.log("Report: Mail sent!");
-        } catch (e) {
-          console.error("Error generating mail report", e);
+      switch(reporter){
+        case "email":{
+          try {
+            let info = await self.sendMail({
+              date: moment().format("YYYY-MM-DD HH:mm"),
+              offers: self.parseOffers(offers)
+            });
+            console.log("Report: Mail sent!");
+          } catch (e) {
+            console.error("Error generating mail report", e);
+          }
+          break;
         }
+        case "html":{
+          try {
+            let date = moment().format("YYYY-MM-DD HH:mm")
+            let mailer = new Mailer(self.config.mail_config);
+            let html = await mailer.generateHTML({
+              date: date,
+              offers: self.parseOffers(offers)
+            });
+            try{
+              fs.writeFileSync(os.homedir()+'\\job-o-scraper_'+moment(date).format("YYYY-MM-DD_HH-mm")+'.html', html);
+              console.log("Report: HTML saved at " + os.homedir());
+            }
+            catch(e){
+              console.error('Error writing HTML report', e);
+            }
+          } catch (e) {
+            console.error("Error generating mail report", e);
+          }
+          break;
+        }        
       }
-      if (reporter == 'html')
-      //@TODO process HTML
     }
   }
 
