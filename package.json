@@ -1,12 +1,12 @@
 {
   "name": "job-o-scraper",
   "description": "A simple tool to easily scrap Job offers from websites and get instant notifications.",
-  "version": "1.0.0",
-  "author": "DESKTOP-42P6MA3\\adriandev.me",
+  "version": "1.1.0",
+  "author": "DESKTOP-42P6MA3\\adriandevme",
   "bin": {
     "jobo": "./bin/run"
   },
-  "bugs": "https://github.com/adriandev.me/job-o-scraper/issues",
+  "bugs": "https://github.com/adriandevme/job-o-scraper/issues",
   "dependencies": {
     "@oclif/command": "1.5.12",
     "@oclif/config": "1.12.12",
@@ -19,6 +19,7 @@
     "cheerio": "1.0.0-rc.3",
     "handlebars": "^4.1.2",
     "mjml": "^4.4.0-beta.1",
+    "moment": "^2.24.0",
     "nock": "^10.0.6",
     "node-persist": "3.0.4",
     "nodemailer": "^6.1.1",
@@ -48,9 +49,13 @@
     "/bin",
     "/lib"
   ],
-  "homepage": "https://github.com/adriandev.me/job-o-scraper",
+  "homepage": "https://github.com/adriandevme/job-o-scraper",
   "keywords": [
-    "oclif", "scraper", "job offers", "stackoverflow", "workana"
+    "oclif",
+    "scraper",
+    "job offers",
+    "stackoverflow",
+    "workana"
   ],
   "license": "MIT",
   "main": "lib/index.js",
