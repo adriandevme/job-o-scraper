@@ -62,7 +62,7 @@
   "oclif": {
     "bin": "jobo"
   },
-  "repository": "adriandev.me/job-o-scraper",
+  "repository": "adriandevme/job-o-scraper",
   "scripts": {
     "posttest": "tslint -p test -t stylish",
     "prepack": "rimraf lib && tsc -b && copyfiles -u 1 src/**/*.mjml lib",
