@@ -1,7 +1,7 @@
 {
   "name": "job-o-scraper",
   "description": "A simple tool to easily scrap Job offers from websites and get instant notifications.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "DESKTOP-42P6MA3\\adriandevme",
   "bin": {
     "jobo": "./bin/run"
@@ -65,7 +65,7 @@
   "repository": "adriandevme/job-o-scraper",
   "scripts": {
     "posttest": "tslint -p test -t stylish",
-    "prepack": "rimraf lib && tsc -b && copyfiles -u 1 src/**/*.mjml lib",
+    "prepack": "rimraf lib && rimraf tsconfig.tsbuildinfo && tsc -b && copyfiles -u 1 src/**/*.mjml lib",
     "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
     "test:dev": "mocha \"test/**/*.test.ts\""
   },
