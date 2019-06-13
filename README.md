@@ -5,10 +5,10 @@ A simple CLI tool for easy scraping Job offers and get instant notifications.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/job-o-scraper.svg)](https://npmjs.org/package/job-o-scraper)
-[![CircleCI](https://circleci.com/gh/adriandev.me/job-o-scraper/tree/master.svg?style=shield)](https://circleci.com/gh/adriandev.me/job-o-scraper/tree/master)
-[![Codecov](https://codecov.io/gh/adriandev.me/job-o-scraper/branch/master/graph/badge.svg)](https://codecov.io/gh/adriandev.me/job-o-scraper)
+[![CircleCI](https://circleci.com/gh/adriandevme/job-o-scraper/tree/master.svg?style=shield)](https://circleci.com/gh/adriandevme/job-o-scraper/tree/master)
+[![Codecov](https://codecov.io/gh/adriandevme/job-o-scraper/branch/master/graph/badge.svg)](https://codecov.io/gh/adriandevme/job-o-scraper)
 [![Downloads/week](https://img.shields.io/npm/dw/job-o-scraper.svg)](https://npmjs.org/package/job-o-scraper)
-[![License](https://img.shields.io/npm/l/job-o-scraper.svg)](https://github.com/adriandev.me/job-o-scraper/blob/master/package.json)
+[![License](https://img.shields.io/npm/l/job-o-scraper.svg)](https://github.com/adriandevme/job-o-scraper/blob/master/package.json)
 
 <!-- Install -->
 ### Install
@@ -43,8 +43,8 @@ Available params are:
     "verbose": false, 
     "reporters": ["email"],
     "mail_config": {
-        "from": "adriandev.me@gmail.com",
-        "to": "adriandev.me@gmail.com",
+        "from": "adriandevme@gmail.com",
+        "to": "adriandevme@gmail.com",
         "host": "in-v3.mailjet.com",
         "port": 25,
         "secure": false,
