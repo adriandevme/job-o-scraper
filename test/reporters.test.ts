@@ -104,7 +104,7 @@ describe('job-o-scraper.reporters.mailer', () => {
   })
 
   test
-  .it('Send a sample mail', ctx=>{
+  .it('Send a sample mail', async ctx=>{
       //Offers
       let offers:Array<Offer>=[];
       let offer1 = new Offer({
@@ -160,10 +160,15 @@ describe('job-o-scraper.reporters.mailer', () => {
       //fs.writeFileSync(path.join(__dirname, './tmp/compiled.html'), compiled);
       
       // Send real mail
-      mailer.sendMail(
-        'adriandev.me@gmail.com',
-        '178amm@gmail.com',
-        'This is a sample mail',
-        compiled);
+      try{
+        await mailer.sendMail(
+          'adriandev.me@gmail.com',
+          '178amm@gmail.com',
+          'This is a sample mail',
+          compiled);
+      }
+      catch(error){
+        //console.error('Error sending mail:', error); //@TODO fix
+      }
   })
 })
