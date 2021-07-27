@@ -29,6 +29,10 @@ OPTIONS
   -h, --help     show CLI help
   -v, --version  show CLI version
 ```
+<!-- How it works -->
+### How it works
+Each time you run the command 'jobo' performs a single search using the specified configuration. job-o-scraper uses its own local database in order to detect new job offers.
+
 <!-- Usage -->
 ### Usage
 
