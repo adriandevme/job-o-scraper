@@ -66,3 +66,4 @@ Using the default "email" reporter option will send you a formatted HTML mail li
 ![](https://i.imgur.com/uhcfA7B.png)
 
 Feel free to add more supported sites adding the convenient extractor.
+
