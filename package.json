@@ -67,7 +67,7 @@
   "scripts": {
     "posttest": "tslint -p test -t stylish",
     "prepack": "rimraf lib && rimraf tsconfig.tsbuildinfo && tsc -b && copyfiles -u 1 src/**/*.mjml lib",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "test": "cross-env TS_NODE_PROJECT=\"tsconfig.testing.json\" nyc --extension .ts mocha --require ts-node/register --forbid-only \"test/**/*.test.ts\"",
     "test:dev": "cross-env TS_NODE_PROJECT=\"tsconfig.testing.json\" mocha --require ts-node/register \"test/**/*.test.ts\""
   },
   "types": "lib/index.d.ts"
