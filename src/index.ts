@@ -13,7 +13,12 @@ class JobOScraper extends Command {
   static flags = {
     // VERSION
     version: flags.version({ char: "v" }),
-    help: flags.help({ char: "h" })
+    help: flags.help({ char: "h" }),
+    // Clear all the data
+    clearCache: flags.boolean({
+      char: "c",
+      description: "Clear ALL stored data BEFORE it runs",
+    }),
   };
 
   static args = [{ name: "conf_file" }];
@@ -24,6 +29,12 @@ class JobOScraper extends Command {
 
     // Init local ddbb
     await storage.init({ dir: path.join(__dirname, "../.node-persist") }); //@TODO should init with a proper config
+    // Clear cache if selected
+    if (flags.clearCache) {
+      this.log("Clearing cache...");
+      await storage.clear();
+      this.log("Cache cleared!");
+    }
     if (args.conf_file) {
       // Run from conf file
       const config = this.parseConf(path.join(args.conf_file));
