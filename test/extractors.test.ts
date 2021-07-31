@@ -3,6 +3,7 @@ import { expect, test } from "@oclif/test";
 import cmd = require("../src");
 import * as fs from "fs";
 import * as path from "path";
+import axios from 'axios';
 
 import { Offer } from "../src/models/Offer";
 import Workana from "../src/extractors/Workana";
@@ -34,10 +35,10 @@ describe("job-o-scraper.extractors", () => {
     expect(result).to.eql(mock_result);
   });
   
-  test.it("should extract all items from StackOverflow website", async ctx => {
+  test.only().it("should extract all items from StackOverflow website", async ctx => {
     // Load HTML
     // const url = 'https://stackoverflow.com/jobs';
-    // let site_response = await axios.get(url as string);
+    // let site_response = await axios.get(url as string); 
     // fs.writeFileSync(path.join(__dirname, './mocks/stackoverflow.mock.html'), site_response.data);
     // Read mock data
     let mock_html = fs.readFileSync(

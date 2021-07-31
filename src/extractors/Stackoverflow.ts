@@ -47,46 +47,42 @@ export default class Stackoverflow {
       // Safely tries to parse object
       let $ = cheerio.load(body);
 
-      $(".-job-summary").each((i, element) => {
+      $(".-job").each((i, element) => {
         let item: any = {};
+        // Define extractor
         item.extractor = Stackoverflow.extractor_ref;
         item.extractor_logo = Stackoverflow.extractor_logo;
-        item.title = $(element)
-          .find(".-title>h2")
-          .text()
-          .trim();
+        // Title
+        item.title = $(element).find("h2").text().trim();
         //item.description = $(element).find('.project-details').text().trim();
-        let salary = this.parseSalary(
-          $(element)
-            .find(".-salary")
-            .text()
-            .trim()
+        // Salary
+        let salaryRaw = this.findSalaryRaw(
+          $(element).find(".fs-caption").text().trim()
         );
-        item.salary_min = salary.min;
-        item.salary_max = salary.max;
-        item.salary_currency = salary.currency;
-        item.description = $(element)
-          .find(".-salary")
-          .text()
-          .trim();
-        item.url =
-          self.MAIN_URL +
-          $(element)
-            .find(".job-details__spaced>a")
-            .attr("href");
-        item.company = $(element)
-          .find(".-company>span:first-child")
-          .text()
-          .trim();
+        if (salaryRaw.length) {
+          let salary = this.parseSalary(salaryRaw);
+          item.salary_min = salary.min;
+          item.salary_max = salary.max;
+          item.salary_currency = salary.currency;
+        }
+        // Description
+        item.description = $(element).find(".-salary").text().trim();
+        // Url
+        item.url = self.MAIN_URL + $(element).find("h2>a").attr("href");
+        // Company
+        item.company = $(element).find("h3>span:first-child").text().trim();
+        // Location
         item.location = $(element)
-          .find(".-company>span:nth-child(2)")
+          .find("h3>span:nth-child(2)")
           .text()
           .trim()
           .substring(3);
+        // Publish date
         item.publish_date_info = $(element)
-          .find(".ps-absolute.pt2.r0.fc-black-500.fs-body1.pr12.t24")
+          .find(".fs-caption:first-child")
           .text()
           .trim();
+        // Internal ID
         item.id = item.company + ">>" + item.title;
 
         const offer = new Offer(item);
@@ -99,25 +95,32 @@ export default class Stackoverflow {
     return items;
   }
 
+  private findSalaryRaw(extra_info: string) {
+    var salaryRaw: string = "";
+    //Salary raw comes in a string with other stuff
+    //split by dots and tries to find something with numbers
+    let arr: Array<string> = extra_info.split("\n");
+    //First element is always the publishing date
+    arr.shift();
+    arr.forEach((item) => {
+      if (/\d/.test(item)) salaryRaw = item.trim();
+    });
+
+    return salaryRaw;
+  }
+
   private parseSalary(salary_raw: string) {
     let salary: any = {
       currency: null,
       min: null,
-      max: null
+      max: null,
     };
     try {
       if (salary_raw) {
         salary.currency = salary_raw[0];
-        salary.min = salary_raw
-          .substring(1)
-          .split("-")[0]
-          .trim()
-          .slice(0, -1);
-        salary.max = salary_raw
-          .substring(1)
-          .split("-")[1]
-          .trim()
-          .slice(0, -1);
+        let split = salary_raw.substring(1).split("–");
+        salary.min = split[0].slice(0, -1);
+        salary.max = split[1].slice(0, -1);
       }
       salary.min = Number(salary.min) * 1000;
       salary.max = Number(salary.max) * 1000;
