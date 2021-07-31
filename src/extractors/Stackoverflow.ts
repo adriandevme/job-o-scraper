@@ -65,6 +65,10 @@ export default class Stackoverflow {
           item.salary_max = salary.max;
           item.salary_currency = salary.currency;
         }
+        // Remote?
+        item.remote = this.isRemote(
+          $(element).find(".fs-caption").text().trim()
+        );
         // Description
         item.description = $(element).find(".-salary").text().trim();
         // Url
@@ -128,5 +132,10 @@ export default class Stackoverflow {
       console.log("Error", e);
     }
     return salary;
+  }
+
+  private isRemote(extra_info: string) {
+    if (extra_info.search("Remote") > 0) return true;
+    else return false;
   }
 }
