@@ -16,7 +16,7 @@ export default class Tecnoempleo {
 
   static extractor_ref: string = "tecnoempleo";
   static extractor_logo: string =
-    "http://ediciones.openexpo.es/wp-content/uploads/2016/11/tecnoempleo-logo.png";
+    "https://openexpoeurope.com/wp-content/uploads/2019/05/logo-tecnoempleo.jpg";
 
   // Constructor
   constructor(config: any) {
