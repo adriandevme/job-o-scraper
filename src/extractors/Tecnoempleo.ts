@@ -70,6 +70,10 @@ export default class Tecnoempleo {
         item.url = $(element).find("h5>a").attr("href");
         // Location
         item.location = extra_info[1].slice(0, -1);
+        if (item.location == "100% En Remoto") {
+          item.remote = true;
+        }
+
         // Publish date
         item.publish_date_info = extra_info[0].slice(0, -1);
         // Custom ID
