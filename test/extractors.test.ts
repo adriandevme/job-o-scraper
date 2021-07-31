@@ -67,37 +67,35 @@ describe("job-o-scraper.extractors", () => {
     }
   );
 
-  test
-    .only()
-    .it("should extract all items from Tecnoempleo website", async (ctx) => {
-      // Load HTML
-      // const url = "https://www.tecnoempleo.com/busqueda-empleo.php";
-      // let site_response = await axios.get(url as string);
-      // fs.writeFileSync(
-      //   path.join(__dirname, "./mocks/tecnoempleo.mock.html"),
-      //   site_response.data
-      // );
-      // Read mock data
-      let mock_html = fs.readFileSync(
-        path.join(__dirname, "./mocks/tecnoempleo.mock.html")
-      );
-      let mock_result_json = JSON.parse(
-        fs.readFileSync(
-          path.join(__dirname, "./mocks/tecnoempleo_result.mock.json"),
-          "utf8"
-        )
-      );
-      let mock_result: Offer[] = [];
-      for (var mr of mock_result_json) {
-        mock_result.push(new Offer(mr));
-      }
-      let parser = new Tecnoempleo({});
-      let result: Offer[] = parser.parseHTML(mock_html);
-      // fs.writeFileSync(
-      //   path.join(__dirname, "./mocks/tecnoempleo_result.mock.json"),
-      //   JSON.stringify(result),
-      //   { flag: "w" }
-      // );
-      expect(result).to.eql(mock_result);
-    });
+  test.it("should extract all items from Tecnoempleo website", async (ctx) => {
+    // Load HTML
+    // const url = "https://www.tecnoempleo.com/busqueda-empleo.php";
+    // let site_response = await axios.get(url as string);
+    // fs.writeFileSync(
+    //   path.join(__dirname, "./mocks/tecnoempleo.mock.html"),
+    //   site_response.data
+    // );
+    // Read mock data
+    let mock_html = fs.readFileSync(
+      path.join(__dirname, "./mocks/tecnoempleo.mock.html")
+    );
+    let mock_result_json = JSON.parse(
+      fs.readFileSync(
+        path.join(__dirname, "./mocks/tecnoempleo_result.mock.json"),
+        "utf8"
+      )
+    );
+    let mock_result: Offer[] = [];
+    for (var mr of mock_result_json) {
+      mock_result.push(new Offer(mr));
+    }
+    let parser = new Tecnoempleo({});
+    let result: Offer[] = parser.parseHTML(mock_html);
+    // fs.writeFileSync(
+    //   path.join(__dirname, "./mocks/tecnoempleo_result.mock.json"),
+    //   JSON.stringify(result),
+    //   { flag: "w" }
+    // );
+    expect(result).to.eql(mock_result);
+  });
 });
