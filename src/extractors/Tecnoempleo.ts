@@ -37,41 +37,42 @@ export default class Tecnoempleo {
       // Safely tries to parse object
       let $ = cheerio.load(body);
 
-      $("article").each((i, element) => {
+      $(".p-2.border-bottom").each((i, element) => {
         let item: any = {};
         item.extractor = Tecnoempleo.extractor_ref;
+        // Extractor Logo
         item.extractor_logo = Tecnoempleo.extractor_logo;
-        item.title = $(element)
-          .find("h3>a")
+        // Title
+        item.title = $(element).find("h5>a").text().trim();
+        // Company
+        item.company = $(element).find(".pl-3.pr-1.mb-1>a").text().trim();
+        // Description
+        // item.description = $(element)
+        //   .find(".d-none.d-md-block.g-mb-5.g-mt-5.g-font-size-13.g-pr-120")
+        //   .text()
+        //   .trim();
+
+        let extra_info = $(element)
+          .find(
+            //".col-12.col-md-4.col-lg-3.order-xs-2.order-md-3.order-lg-3.hidden-sm-down>div"
+            ".bg-theme-color-light.h-100-xs.p-3.rounded.mb-3.fs--15.text-muted"
+          )
           .text()
-          .trim();
-        item.description = $(element)
-          .find(".d-none.d-md-block.g-mb-5.g-mt-5.g-font-size-13.g-pr-120")
-          .text()
-          .trim();
-        let salary = self.parseSalary(
-          $(element)
-            .find(".d-none.d-md-inline.g-mt-0.g-color-gray-dark-v5")
-            .html()
-        );
+          .trim()
+          .replace(/\t/g, "")
+          .split("\n  \n");
+        // Salary stuff
+        let salary = self.parseSalary(extra_info[4]);
         item.salary_min = salary.min;
         item.salary_max = salary.max;
         item.salary_currency = salary.currency;
-        item.url = $(element)
-          .find("h3>a")
-          .attr("href");
-        item.company = $(element)
-          .find("h4>a")
-          .text()
-          .trim();
-        item.location = $(element)
-          .find(".list-inline.g-mb-5>li:nth-child(2)")
-          .text()
-          .trim();
-        item.publish_date_info = $(element)
-          .find(".g-color-orange")
-          .text()
-          .trim();
+        // Url
+        item.url = $(element).find("h5>a").attr("href");
+        // Location
+        item.location = extra_info[1].slice(0, -1);
+        // Publish date
+        item.publish_date_info = extra_info[0].slice(0, -1);
+        // Custom ID
         item.id = item.company + ">>" + item.title;
 
         const offer = new Offer(item);
@@ -88,23 +89,15 @@ export default class Tecnoempleo {
     let salary: any = {
       currency: null,
       min: null,
-      max: null
+      max: null,
     };
     try {
       if (salary_raw) {
-        salary_raw = salary_raw.split(
-          "fal fa-wallet g-pos-rel g-top-1 g-ml-5"
-        )[1];
-        salary_raw = salary_raw.split("|")[0];
-        salary_raw = salary_raw.substring(12);
-        salary.min = salary_raw.split("&#xFFFD")[0].trim();
-        salary.max = salary_raw
-          .split("&#xFFFD")[1]
-          .substring(3)
-          .trim();
+        salary_raw = salary_raw.slice(0, -4);
+        let salary_split = salary_raw.split(" - ");
+        salary.min = Number(salary_split[0].slice(0, -1)) * 1000;
+        salary.max = Number(salary_split[1].slice(0, -1)) * 1000;
       }
-      salary.min = Number(salary.min) * 1000;
-      salary.max = Number(salary.max) * 1000;
       salary.currency = "€";
     } catch (e) {
       //console.log('Error', e);
