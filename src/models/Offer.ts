@@ -19,6 +19,7 @@ export class Offer { //@TODO add default
   readonly publish_date_info: string;
   readonly extractor: string;
   readonly extractor_logo: string; //@TODO to move when I'll interface the class
+  readonly remote: boolean;
   //readonly createdAt: Date;
 
   /**
@@ -41,6 +42,7 @@ export class Offer { //@TODO add default
     this.salary_currency = data.salary_currency;
     this.publish_date = data.publish_date;
     this.publish_date_info = data.publish_date_info;
+    this.remote = data.remote || false;
     //this.createdAt = new Date(Date.now());
   }
 

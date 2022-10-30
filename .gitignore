@@ -13,3 +13,4 @@ node_modules
 *.tgz
 *.tsbuildinfo
 /test/tmp/*
+.vscode
