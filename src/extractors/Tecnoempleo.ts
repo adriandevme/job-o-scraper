@@ -37,45 +37,54 @@ export default class Tecnoempleo {
       // Safely tries to parse object
       let $ = cheerio.load(body);
 
-      $(".p-2.border-bottom").each((i, element) => {
+      $(".p-2.border-bottom.py-3.bg-white").each((i, element) => {
         let item: any = {};
         item.extractor = Tecnoempleo.extractor_ref;
         // Extractor Logo
         item.extractor_logo = Tecnoempleo.extractor_logo;
         // Title
-        item.title = $(element).find("h5>a").text().trim();
+        item.title = $(element).find(".h5>a").text().trim();
         // Company
-        item.company = $(element).find(".pl-3.pr-1.mb-1>a").text().trim();
-        // Description
-        // item.description = $(element)
-        //   .find(".d-none.d-md-block.g-mb-5.g-mt-5.g-font-size-13.g-pr-120")
-        //   .text()
-        //   .trim();
-
-        let extra_info = $(element)
-          .find(
-            //".col-12.col-md-4.col-lg-3.order-xs-2.order-md-3.order-lg-3.hidden-sm-down>div"
-            ".bg-theme-color-light.h-100-xs.p-3.rounded.mb-3.fs--15.text-muted"
-          )
+        item.company = $(element)
+          .find(".col-10.col-md-9.col-lg-7>a")
           .text()
-          .trim()
-          .replace(/\t/g, "")
-          .split("\n  \n");
+          .trim();
+        // Description
+        item.description = $(element)
+          .find(".hidden-md-down.text-gray-800")
+          .text()
+          .trim();
+
+        let extra_info =
+          $(element)
+            .find(
+              ".col-12.col-lg-3.text-gray-600.pt-2.line-height-10.text-right.hidden-md-down"
+            )
+            .html()
+            ?.toString()
+            .replace(/\t/g, "")
+            .replace(/\n/g, "")
+            .split("<br>") || new Array();
+
         // Salary stuff
         let salary = self.parseSalary(extra_info[4]);
         item.salary_min = salary.min;
         item.salary_max = salary.max;
         item.salary_currency = salary.currency;
         // Url
-        item.url = $(element).find("h5>a").attr("href");
+        item.url = $(element).find(".h5>a").attr("href");
         // Location
-        item.location = extra_info[1].slice(0, -1);
-        if (item.location == "100% En Remoto") {
-          item.remote = true;
+        if (extra_info[2] == "<b>100% En Remoto</b>") item.remote = true;
+        else {
+          try {
+            item.location = extra_info[2].split("<b>")[1].split("</b>")[0];
+          } catch (e) {
+            console.log("Cannot extract location", e);
+          }
         }
 
         // Publish date
-        item.publish_date_info = extra_info[0].slice(0, -1);
+        item.publish_date_info = extra_info[0].toString().split("<span")[0];
         // Custom ID
         item.id = item.company + ">>" + item.title;
 
