@@ -51,7 +51,6 @@ Available params are:
 {
   "urls": [
     "https://www.workana.com/jobs?ref=home_top_bar&page=1",
-    "https://www.stackoverflow.com/jobs",
     "https://www.tecnoempleo.com/busqueda-empleo.php"
   ],
   "verbose": false,
@@ -70,7 +69,7 @@ Available params are:
 }
 ```
 
-Currently supported sites are [Stackoverflow](https://stackoverflow.com/jobs), [Tecnoempleo](https://tecnoempleo.com) and [Workana](https://www.workana.com/jobs).
+Currently supported sites are [Tecnoempleo](https://tecnoempleo.com) and [Workana](https://www.workana.com/jobs).
 
 Using the default "email" reporter option will send you a formatted HTML mail like this
 ![](https://i.imgur.com/uhcfA7B.png)
