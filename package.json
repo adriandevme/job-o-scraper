@@ -1,7 +1,7 @@
 {
   "name": "job-o-scraper",
   "description": "A simple tool to easily scrap Job offers from websites and get instant notifications.",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "author": "DESKTOP-42P6MA3\\adriandevme",
   "bin": {
     "jobo": "./bin/run"
